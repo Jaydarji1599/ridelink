@@ -13,7 +13,6 @@ class Home extends Component {
     async componentDidMount() {
       const res = await fetch('http://localhost:8000/api/ridelist/');
       const rideList = await res.json();
-      console.log(rideList);
       this.setState({
         rideList
       })

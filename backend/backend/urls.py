@@ -17,11 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from ridelist import views
+from django.views.generic.base import TemplateView
+from Auth.views import RegisterAPI
 
 router = routers.DefaultRouter()
 router.register(r'ridelist', views.RideView, 'ridelist')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path("api/", include("accounts.urls")),
+    path('api2/', include(router.urls)),
+    path("accounts/", include("django.contrib.auth.urls")), 
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path('api/register/', RegisterAPI.as_view(), name='register'),
 ]

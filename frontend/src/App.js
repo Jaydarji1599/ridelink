@@ -1,4 +1,6 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
+import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
+import bg_landing from "../src/assets/bg_landing.jpg";
 
 class App extends Component {
   constructor(props) {
@@ -9,46 +11,39 @@ class App extends Component {
       
   }
 
-    async componentDidMount() {
-      const res = await fetch('http://localhost:8000/api/ridelist/');
-      const rideList = await res.json();
-      console.log(rideList);
-      this.setState({
-        rideList
-      })
-    }
-
-    renderItems = () => {
-
-      return this.state.rideList.map(item => (
-        <tr>
-          <th scope="row">{item.id}</th>
-          <td>{item.source}</td>
-          <td>{item.destination}</td>
-          <td>{item.date}</td>
-          <td>i{item.time}</td>
-        </tr>
-      ));
-    };
-
     render() {
       return (
-        <main className="content">
-          <div className="row">
-            <table class="table table-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Source</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-              </tr>
-              <tbody>
-                {this.renderItems()}
-              </tbody>
-            </table>
-          </div>
-        </main>
+        <>
+        <Container className="min-vh-100 bg-dark" fluid>
+          <Row className="min-vh-100">
+            <Col className="my-auto">
+              <h1 className="mt-3 p-2" style={{textAlign: "center", color: "white"}}>RideLink</h1>
+              <Card className="bg-success m-3 p-2">
+                <Form className="p-3 gap-3">
+                  <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formGroupPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Button variant="outline-light" type="submit">
+                    Sign in
+                  </Button>
+                </Form>
+              </Card>
+            </Col>
+              
+            <Col className="min-vh-100 my-auto" style={{
+                backgroundImage: `url(${bg_landing})`,
+                backgroundSize: "cover"
+              }}>
+                <h1 style={{color: "white"}}>Ridesharing made easy.</h1>
+            </Col>
+          </Row>
+          </Container>
+        </>
       )
     }
   }

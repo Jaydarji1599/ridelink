@@ -1,11 +1,15 @@
-# Dependencies
-asgiref==3.6.0
-cffi==1.15.1
-cryptography==39.0.1
-Django==4.1.6
-django-cors-headers==3.13.0
-django-rest-knox==4.2.0
-djangorestframework==3.14.0
-pycparser==2.21
-pytz==2022.7.1
-sqlparse==0.4.3
+# Step 1
+## Getting Started
+python manage.py runserver
+
+# Step 2
+
+## Creating login and signup 
+
+In this project to access the login page http://127.0.0.1:8000/api/login/
+
+In this project to access the signup page http://127.0.0.1:8000/api/signup/
+
+# The above login and steup was created by the guide
+
+https://studygyaan.com/django/django-rest-framework-tutorial-register-login-logout

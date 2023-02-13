@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
 import bg_landing from "../assets/bg_landing.jpg";
 import { Link } from "react-router-dom";
+import {MdDirectionsCarFilled} from 'react-icons/md';
 
 class Login extends Component {
 
@@ -11,7 +12,7 @@ class Login extends Component {
         <Container className="min-vh-100 bg-dark" fluid>
           <Row className="min-vh-100">
             <Col className="my-auto">
-              <h1 className="mt-3 p-2" style={{textAlign: "center", color: "white"}}>RideLink</h1>
+              <h1 className="mt-3 p-2" style={{textAlign: "center", color: "white"}}><MdDirectionsCarFilled />RideLink</h1>
               <Card className="bg-success m-3 p-2">
                 <Form className="p-3 gap-3">
                   <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -38,7 +39,7 @@ class Login extends Component {
                 <h1 style={{color: "white"}}>Ridesharing made easy.</h1>
             </Col>
           </Row>
-          </Container>
+        </Container>
         </>
       )
     }

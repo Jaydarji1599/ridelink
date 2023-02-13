@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Button, Card } from "react-bootstrap";
 
 class Home extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class Home extends Component {
     async componentDidMount() {
       const res = await fetch('http://localhost:8000/api/ridelist/');
       const rideList = await res.json();
-      console.log(rideList);
       this.setState({
         rideList
       })
@@ -26,7 +26,8 @@ class Home extends Component {
           <td>{item.source}</td>
           <td>{item.destination}</td>
           <td>{item.date}</td>
-          <td>i{item.time}</td>
+          <td>{item.time}</td>
+          <td>{item.phone}</td>
         </tr>
       ));
     };
@@ -34,20 +35,24 @@ class Home extends Component {
     render() {
       return (
         <main className="content">
-          <div className="row">
-            <table class="table table-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Source</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-              </tr>
-              <tbody>
-                {this.renderItems()}
-              </tbody>
-            </table>
-          </div>
+          <Card className="bg-dark">
+            <h3 style={{textAlign: "center", color: "white"}}>Available Rides: </h3>
+            <div className="row">
+              <table class="table table-dark p-3">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Destination</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Contact</th>
+                </tr>
+                <tbody>
+                  {this.renderItems()}
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </main>
       )
     }

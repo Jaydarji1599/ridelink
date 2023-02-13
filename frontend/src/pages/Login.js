@@ -38,7 +38,7 @@ class Login extends Component {
                 <h1 style={{color: "white"}}>Ridesharing made easy.</h1>
             </Col>
           </Row>
-          </Container>
+        </Container>
         </>
       )
     }

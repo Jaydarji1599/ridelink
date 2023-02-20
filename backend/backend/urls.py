@@ -25,8 +25,8 @@ router.register(r'ridelist', views.RideView, 'ridelist')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/", include("accounts.urls")),
-    path('api2/', include(router.urls)),
+    path("api/auth/", include("accounts.urls")),
+    path('api/', include(router.urls)),
     path("accounts/", include("django.contrib.auth.urls")), 
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path('api/register/', RegisterAPI.as_view(), name='register'),

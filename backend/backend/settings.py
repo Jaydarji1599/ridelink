@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'knox',
+    'rest_framework.authtoken',
+    'phonenumber_field',
 ]
 
 REST_FRAMEWORK = {

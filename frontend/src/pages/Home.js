@@ -1,61 +1,42 @@
 import React, { Component } from "react"
-import { Button, Card } from "react-bootstrap";
-
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rideList: []
-      };
-      
-  }
-
-    async componentDidMount() {
-      const res = await fetch('http://localhost:8000/api/ridelist/');
-      const rideList = await res.json();
-      this.setState({
-        rideList
-      })
-    }
-
-    renderItems = () => {
-
-      return this.state.rideList.map(item => (
-        <tr>
-          <th scope="row">{item.id}</th>
-          <td>{item.source}</td>
-          <td>{item.destination}</td>
-          <td>{item.date}</td>
-          <td>{item.time}</td>
-          <td>{item.phone}</td>
-        </tr>
-      ));
-    };
+import { Row, Col, ListGroup, Tab } from "react-bootstrap";
+import RideLinkHeader from "../components/RideLinkHeader";
+import AvailableRides from "../components/home/AvailableRides";
+import HelpSection from "../components/home/HelpSection";
+import MyProfile from "../components/home/MyProfile";
+export class Home extends Component {
 
     render() {
       return (
-        <main className="content">
-          <Card className="bg-dark">
-            <h3 style={{textAlign: "center", color: "white"}}>Available Rides: </h3>
-            <div className="row">
-              <table class="table table-dark p-3">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Source</th>
-                  <th scope="col">Destination</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Contact</th>
-                </tr>
-                <tbody>
-                  {this.renderItems()}
-                </tbody>
-              </table>
-            </div>
-          </Card>
-        </main>
+        <>
+          <RideLinkHeader />
+          <Tab.Container defaultActiveKey="#" fluid>
+            <Row>
+              <Col sm={2}>
+                <ListGroup variant="flush" className="flex-column">
+                  <ListGroup.Item variant="dark" action href="#">Rides</ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#myprofile">My Profile</ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#help">Help</ListGroup.Item>
+                </ListGroup>
+              </Col>
+              <Col>
+                <Tab.Content>
+                  <Tab.Pane eventKey="#">
+                    <AvailableRides />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#myprofile">
+                    <MyProfile />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#help">
+                    <HelpSection />
+                  </Tab.Pane>
+                </Tab.Content>
+              </Col>
+            </Row>
+          </Tab.Container>
+          </>
       )
     }
   }
-  
+
 export default Home;

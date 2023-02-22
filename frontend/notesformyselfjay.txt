@@ -1,0 +1,7 @@
+- START OCCUPYING USER DATA IN PROFILE
+- START BUILDING SEARCH FUNCTIONALITY FOR RIDES, ADD RIDES FUNCTIONALITY 
+
+- implement add ride redux action in addModal; must convert to class component
+TO ADD LOCATIONS:
+    - update django ride models.py
+    - update addModal.js

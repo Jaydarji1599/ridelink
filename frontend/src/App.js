@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Main from "./components/main";
+import store from "./store";
+import { loadUser } from "./actions/auth";
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +11,9 @@ class App extends Component {
       };
       
   }
-
+    componentDidMount() {
+      store.dispatch(loadUser());
+    }
     render() {
       return (
         <div className="App">

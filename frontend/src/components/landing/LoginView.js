@@ -30,7 +30,7 @@ class LoginView extends Component {
             return <Navigate to="/" />
         }
         return (
-            <Card className="bg-success m-3 p-2">
+            <Card className="bg-success m-3 p-2" style={{width: "350px"}}>
                 <Form className="p-3 m-3 gap-3">
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label style={{color: "white"}}>Username</Form.Label>

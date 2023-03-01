@@ -53,7 +53,6 @@ export const login = (username, password) => dispatch => {
             });
         })
         .catch(err => {
-            console.log(err);
             dispatch({
                 type: LOGIN_FAIL
             })
@@ -61,7 +60,7 @@ export const login = (username, password) => dispatch => {
 };
 
 // REGISTER USER
-export const register = ({ email, username, password }) => dispatch => {
+export const register = ({ username, email, firstName, lastName, password }) => dispatch => {
 
     const config = {
         headers: {
@@ -74,9 +73,10 @@ export const register = ({ email, username, password }) => dispatch => {
         username,
         email,
         password,
+        first_name: firstName,
+        last_name: lastName,
     })
-
-
+    
     axios.post('api/auth/register/', body, config)
         .then(res => {
             dispatch({
@@ -97,7 +97,7 @@ export const register = ({ email, username, password }) => dispatch => {
 // LOG OUT USER
 export const logout = () => (dispatch, getState) => {
 
-    axios.post('api/auth/logout/', null, tokenConfig(getState))
+    axios.post('/api/auth/logout/', null, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: LOGOUT_SUCCESS

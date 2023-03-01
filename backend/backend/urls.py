@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from ridelist import views
+from accounts.views import UserView
 from django.views.generic.base import TemplateView
 
 router = routers.DefaultRouter()
 router.register(r'ridelist', views.RideView, 'ridelist')
+router.register(r'getuser', UserView, 'getuser')
 
 urlpatterns = [
     # user auth api

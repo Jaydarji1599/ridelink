@@ -2,10 +2,12 @@ import React, { Component } from "react"
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRides } from '../../actions/rides';
+import { getRides, filterRides } from '../../actions/rides';
 import { BsArrowRightCircle, BsSearch, BsPlusCircle } from 'react-icons/bs';
 import AddModal from "./rideSection/AddModal";
 import SearchModal from "./rideSection/SearchModal";
+import ProfileModal from "./rideSection/ProfileModal";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 export class AvailableRides extends Component {
 
@@ -13,16 +15,18 @@ export class AvailableRides extends Component {
       super(props);
       this.state = {
         showSearchModal: false,
-        showAddModal: false
+        showAddModal: false,
       }
     }
+
     static propTypes = {
         rides: PropTypes.array.isRequired
-      }
+    }
   
-      async componentDidMount() {
+    async componentDidMount() {
         this.props.getRides();
-      }
+        console.log(this.props.rides);
+    }
       
 
       // control modal functions
@@ -35,13 +39,13 @@ export class AvailableRides extends Component {
         return this.props.rides.map(item => (
             <Col>
               <Card key={item.id} bg="dark" text="white" className="mb-2">
-                <Card.Header>{item.source.toUpperCase()} <BsArrowRightCircle /> {item.destination.toUpperCase()}</Card.Header>
+                <Card.Header>{item.source} <BsArrowRightCircle /> {item.destination}</Card.Header>
                 <Card.Body>
                   <Card.Subtitle className="mb-2 text-muted">{item.date}, {item.time}</Card.Subtitle>
                   <Card.Text>
-                    {item.name}: {item.phone}
+                    <ProfileModal ride={item} />
                   </Card.Text>
-                  <Button variant="outline-success" className="btn-block" size="md">
+                  <Button variant="outline-success" className="btn-block" size="md" onClick={() => window.location.href = `tel:${item.phone}`}>
                     Book
                   </Button>
                 </Card.Body>
@@ -76,7 +80,7 @@ export class AvailableRides extends Component {
 }
 
 const mapStateToProps = state => ({
-    rides: state.rides.rides
+    rides: state.rides.filteredRides
 })
     
-export default connect(mapStateToProps, {getRides})(AvailableRides);
+export default connect(mapStateToProps, {getRides, filterRides})(AvailableRides);

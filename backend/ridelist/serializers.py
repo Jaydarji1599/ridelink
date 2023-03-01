@@ -12,5 +12,6 @@ class RideSerializer(serializers.ModelSerializer):
             'source',
             'destination',
             'date',
-            'time'
+            'time',
+            'userId'
         )

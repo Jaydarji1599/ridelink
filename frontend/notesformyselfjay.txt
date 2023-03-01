@@ -3,5 +3,6 @@
 
 - implement add ride redux action in addModal; must convert to class component
 TO ADD LOCATIONS:
-    - update django ride models.py
     - update addModal.js
+
+= fortify add rides functionality

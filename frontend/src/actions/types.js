@@ -1,5 +1,7 @@
 export const GET_RIDES = "GET_RIDES";
 export const ADD_RIDE = "ADD_RIDE";
+export const DELETE_RIDE = "DELETE_RIDE";
+export const FILTER_RIDES = "FILTER_RIDES";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";

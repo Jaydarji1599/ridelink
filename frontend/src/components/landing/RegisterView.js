@@ -10,7 +10,9 @@ class RegisterView extends Component {
         email: '',
         username: '',
         password: '',
-        password2: ''
+        password2: '',
+        firstName: '',
+        lastName: ''
     }
 
     static propTypes = {
@@ -22,11 +24,11 @@ class RegisterView extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.state.pwdError = false;
-        const { email, username, password, password2 } = this.state;
+        const { username, email, firstName, lastName, password, password2 } = this.state;
         if (password !== password2) {
             this.state.pwdError = true
         } else {
-            this.props.register({email, username, password})
+            this.props.register({ username, email, firstName, lastName, password })
         }
     };
 
@@ -39,13 +41,19 @@ class RegisterView extends Component {
         return (
             <Card className="bg-dark m-3 p-2">
                 <Form className="p-3 m-3 gap-3">
+                    
+                    <Form.Label style={{color: "white"}}>User Info:</Form.Label>
                     <Form.Group className="mb-2" controlId="formGroupUsername">
-                        <Form.Label style={{color: "white"}}>Username</Form.Label>
-                        <Form.Control type="username" placeholder="Enter username" name="username" onChange={this.onChange} />
+                        <Form.Control type="username" placeholder="Username" name="username" onChange={this.onChange} />
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label style={{color: "white"}}>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" name="username" onChange={this.onChange}/>
+                        <Form.Control type="email" placeholder="Email" name="email" onChange={this.onChange}/>
+                    </Form.Group>
+                    <Form.Group className="mb-2" controlId="formGroupFirstName">
+                        <Form.Control type="name" placeholder="First Name" name="firstName" onChange={this.onChange}/>
+                    </Form.Group>
+                    <Form.Group className="mb-2" controlId="formGroupLastName">
+                        <Form.Control type="name" placeholder="Last Name" name="lastName" onChange={this.onChange}/>
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupPassword">
                         <Form.Label style={{color: "white"}}>Password</Form.Label>

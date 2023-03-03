@@ -1,4 +1,4 @@
-import { GET_RIDES, ADD_RIDE, DELETE_RIDE, FILTER_RIDES } from '../actions/types';
+import { GET_RIDES, ADD_RIDE, DELETE_RIDE, EDIT_RIDE, FILTER_RIDES } from '../actions/types';
 
 const initialState = {
     rides: [],
@@ -14,8 +14,6 @@ export default function(state = initialState, action) {
                 filteredRides: action.payload
             }
         case FILTER_RIDES:
-            console.log(action.payload);
-            console.log(state.rides);
             return {
                 ...state,
                 filteredRides: state.rides.filter(function(ride) {
@@ -38,6 +36,14 @@ export default function(state = initialState, action) {
                 })
             };
         case ADD_RIDE:
+            return {
+                ...state,
+                rides: [...state.rides, action.payload],
+                filteredRides: [...state.rides, action.payload]
+            }
+        case EDIT_RIDE:
+            // TODO:
+            // rides & filteredRides becomes the old state - old ride + new ride.
             return {
                 ...state,
                 rides: [...state.rides, action.payload],

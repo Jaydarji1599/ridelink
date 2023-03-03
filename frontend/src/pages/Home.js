@@ -4,6 +4,7 @@ import RideLinkHeader from "../components/RideLinkHeader";
 import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";
 import MyProfile from "../components/home/MyProfile";
+import { TestSection } from "../components/home/TestSection";
 export class Home extends Component {
 
     render() {
@@ -17,6 +18,7 @@ export class Home extends Component {
                   <ListGroup.Item variant="dark" action href="#">Rides</ListGroup.Item>
                   <ListGroup.Item variant="dark" action href="#myprofile">My Profile</ListGroup.Item>
                   <ListGroup.Item variant="dark" action href="#help">Help</ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#test">Test Section</ListGroup.Item>
                 </ListGroup>
               </Col>
               <Col>
@@ -29,6 +31,9 @@ export class Home extends Component {
                   </Tab.Pane>
                   <Tab.Pane eventKey="#help">
                     <HelpSection />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#test">
+                    <TestSection />
                   </Tab.Pane>
                 </Tab.Content>
               </Col>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_RIDES, ADD_RIDE, DELETE_RIDE, FILTER_RIDES } from "./types";
+import { GET_RIDES, ADD_RIDE, EDIT_RIDE, DELETE_RIDE, FILTER_RIDES } from "./types";
 
 // get rides
 export const getRides = () => dispatch => {
@@ -44,6 +44,11 @@ export const deleteRide = (id) => (dispatch, getState) => {
             });
         })
         .catch((err) => console.log(err));
+}
+
+export const editRide = (ride) => (dispatch, getState) => {
+    dispatch(deleteRide(ride.id));
+    dispatch(addRide(ride));
 }
 
 

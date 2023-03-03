@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addRide } from '../../../actions/rides';
 import { Component } from 'react';
-
+import { LOCATIONS, generateOptionsFromLocations } from '../../../assets/locations';
 export class AddModal extends Component {
     state = {
         source: '',
@@ -29,6 +29,7 @@ export class AddModal extends Component {
         destination: '',
         date: '',
         time: '',
+        phone: ''
       });
       this.props.close();
     };
@@ -54,22 +55,14 @@ export class AddModal extends Component {
                                 <Form.Label>Source</Form.Label>
                                 <Form.Control as="select" name="source" placeholder="Select starting city" onChange={this.onChange}>
                                     <option>-- Select --</option>
-                                    <option>HALIFAX</option>
-                                    <option>ANTIGONISH</option>
-                                    <option>SYDNEY</option>
-                                    <option>MONCTON</option>
-                                    <option>TRURO</option>
+                                    {generateOptionsFromLocations(LOCATIONS)}
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Destination</Form.Label>
                                 <Form.Control placeholder="Select destination city" as="select" name="destination" onChange={this.onChange}>
                                     <option>-- Select --</option>
-                                    <option>HALIFAX</option>
-                                    <option>ANTIGONISH</option>
-                                    <option>SYDNEY</option>
-                                    <option>MONCTON</option>
-                                    <option>TRURO</option>
+                                    {generateOptionsFromLocations(LOCATIONS)}
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group>

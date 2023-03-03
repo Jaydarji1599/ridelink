@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRides, filterRides } from '../../actions/rides';
 import { BsArrowRightCircle, BsSearch, BsPlusCircle } from 'react-icons/bs';
-import AddModal from "./rideSection/AddModal";
-import SearchModal from "./rideSection/SearchModal";
-import ProfileModal from "./rideSection/ProfileModal";
+import AddModal from "./availableRides/AddModal";
+import SearchModal from "./availableRides/SearchModal";
+import ProfileModal from "./availableRides/ProfileModal";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 export class AvailableRides extends Component {
@@ -25,7 +25,7 @@ export class AvailableRides extends Component {
   
     async componentDidMount() {
         this.props.getRides();
-        console.log(this.props.rides);
+        console.log(this.props.rides)
     }
       
 

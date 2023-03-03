@@ -2,6 +2,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { filterRides, getRides } from '../../../actions/rides';
+import { generateOptionsFromLocations, LOCATIONS } from '../../../assets/locations';
 
 export class SearchModal extends Component {
     state = {
@@ -42,22 +43,14 @@ export class SearchModal extends Component {
                                     <Form.Label>Source</Form.Label>
                                     <Form.Control as="select" name="source" placeholder="Select starting city" onChange={this.onChange}>
                                         <option>-- Select --</option>
-                                        <option>HALIFAX</option>
-                                        <option>ANTIGONISH</option>
-                                        <option>SYDNEY</option>
-                                        <option>MONCTON</option>
-                                        <option>TRURO</option>
+                                        {generateOptionsFromLocations(LOCATIONS)}
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label>Destination</Form.Label>
                                     <Form.Control placeholder="Select destination city" as="select" name="destination" onChange={this.onChange}>
                                         <option>-- Select --</option>
-                                        <option>HALIFAX</option>
-                                        <option>ANTIGONISH</option>
-                                        <option>SYDNEY</option>
-                                        <option>MONCTON</option>
-                                        <option>TRURO</option>
+                                        {generateOptionsFromLocations(LOCATIONS)}
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group>

@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.profileTabs ul > li > a {
+  background-color: grey;
+  color: white;
+}

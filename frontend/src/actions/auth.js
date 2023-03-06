@@ -8,7 +8,9 @@ import {
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
     REGISTER_FAIL,
-    REGISTER_SUCCESS 
+    REGISTER_SUCCESS,
+    UPDATE_PROFILE,
+    UPDATE_FAIL
 } from './types';
 
 // check token & load user
@@ -124,4 +126,27 @@ export const tokenConfig = getState => {
     }
 
     return config
+}
+
+export const updateProfile = ({ username, email, firstName, lastName, pk }) => (dispatch, getState) => {
+    const config = tokenConfig(getState);
+    const body = JSON.stringify({
+        username,
+        email,
+        first_name: firstName,
+        last_name: lastName,
+    });
+    axios.put(`/api/auth/update/${pk}/`, body, config)
+        .then(res => {
+            dispatch({
+                type: UPDATE_PROFILE,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: UPDATE_FAIL,
+                payload: err.response.request.responseText
+            })
+        })
 }

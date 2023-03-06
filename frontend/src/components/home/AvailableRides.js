@@ -25,7 +25,6 @@ export class AvailableRides extends Component {
   
     async componentDidMount() {
         this.props.getRides();
-        console.log(this.props.rides)
     }
       
 

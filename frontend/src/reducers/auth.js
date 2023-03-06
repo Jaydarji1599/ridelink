@@ -6,7 +6,9 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    UPDATE_PROFILE,
+    UPDATE_FAIL
 } from "../actions/types"
 
 const initialState = {
@@ -15,7 +17,11 @@ const initialState = {
     isLoading: false,
     user: null,
     loginError: false,
-    registrationError: false
+    registrationError: false,
+    updateError: {
+        show: false,
+        message: {}
+    }
 }
 
 export default function(state = initialState, action) {
@@ -74,6 +80,29 @@ export default function(state = initialState, action) {
                 isLoading: false,
                 registrationError: false,
                 loginError: false
+            }
+        case UPDATE_PROFILE:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    username: action.payload.username,
+                    email: action.payload.email,
+                    first_name: action.payload.first_name,
+                    last_name: action.payload.last_name
+                },
+                updateError: {
+                    show: false,
+                    message: {}
+                },
+            }
+        case UPDATE_FAIL:
+            return {
+                ...state,
+                updateError: {
+                    show: true,
+                    message: JSON.parse(action.payload)
+                },
             }
         default:
             return state

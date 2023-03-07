@@ -32,8 +32,8 @@ export class RideDetailModal extends Component {
       console.log(ride)
       this.props.editRide(ride, this.props.deleteId);
       this.setState({
-        source: ride.name,
-        destination: ride.source,
+        source: ride.source,
+        destination: ride.destination,
         date: ride.date,
         time: ride.time,
         phone: ride.phone
@@ -59,8 +59,11 @@ export class RideDetailModal extends Component {
                     keyboard={false}
                     size="lg"
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                     <Modal.Title>Ride Details</Modal.Title>
+                    <Button variant="light" onClick={this.handleClose} className="btn-close">
+                        <span aria-hidden="true">&times;</span>
+                    </Button>
                     </Modal.Header>
                     <Modal.Body className="gap-3">
                         <Row>

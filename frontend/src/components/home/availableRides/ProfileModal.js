@@ -24,8 +24,11 @@ export default function ProfileModal({ride}) {
         <>
             <Link onClick={handleShow}> <span style={{display: 'flex', alignItems: 'center'}}><CgProfile /> {ride.name} <IoIosStar className="ml-1" /> {rating} </span></Link>
             <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Driver Info:</Modal.Title>
+                <Button variant="light" onClick={handleClose} className="btn-close">
+                    <span aria-hidden="true">&times;</span>
+                </Button>
             </Modal.Header>
             <Modal.Body>
                 <ListGroup>

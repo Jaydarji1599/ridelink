@@ -34,8 +34,11 @@ export class SearchModal extends Component {
                     backdrop="static"
                     keyboard={false}
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                     <Modal.Title>Search Rides: </Modal.Title>
+                    <Button variant="light" onClick={this.props.close} className="btn-close">
+                        <span aria-hidden="true">&times;</span>
+                    </Button>
                     </Modal.Header>
                     <Modal.Body>
                     <Form className="gap-3">

@@ -1,0 +1,5 @@
+npm i react-scripts
+npm install bootstrap
+npm install @reduxjs/toolkit
+npm i axios
+npm i react-redux

@@ -16,7 +16,7 @@ export default function ProfileModal({ride}) {
             const user = res.data;
             setUser(user);
         })
-    })
+    }, [])
 
     return (
         <>

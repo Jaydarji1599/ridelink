@@ -1,23 +1,25 @@
 import React, { Component } from "react"
-import { Card, Container, ListGroup, Row, Col, Button, Stack } from "react-bootstrap";
+import { Card, Container, ListGroup, Row, Col, Button, Stack, Form } from "react-bootstrap";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { connect } from 'react-redux';
 import { deleteRide, getRides } from '../../actions/rides';
 import EditModal from "./myProfile/EditModal";
+import EditProfile from "./myProfile/EditProfile";
+import ProfileDetail from './myProfile/ProfileDetail';
 
 export class MyProfile extends Component {
-
+    state = {
+        showEditProfile: false
+    }
     onDelete = (e) => {
         this.props.deleteRide(e.target.name);
     }
 
-    async componentDidMount() {
-        this.props.getRides();
-    }
-
-    // control modal functions
+    // control popups/context switches
     openEditModal = () => this.setState({showEditModal: true});
     closeEditModal = () => this.setState({showEditModal: false});
+    showEdit = () => this.setState({showEditProfile: true});
+    closeEdit = () => this.setState({showEditProfile: false});
 
     renderItems = () => {
         let filteredRides = this.props.rides.filter(ride => ride.userId === this.props.user.id);
@@ -42,31 +44,15 @@ export class MyProfile extends Component {
             <>
                 <Card className="bg-success p-3 m-3 mt-3">
                     <Container className="m-2">
-                        
-                        <div className='d-flex align-items-center justify-content-between m-2'>
-                            <h2 style={{color: 'white'}}>My Profile</h2>
-                        </div>
                         <Row>
-                        <Col>
-                            <h4>My Info:</h4>
-                            <ListGroup>
-                                <ListGroup.Item>
-                                    Username: {'  ' + this.props.user.username}
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    Email: {'  ' + this.props.user.email}
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    First Name: {'  ' + this.props.user.first_name}
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    Last Name: {'  ' + this.props.user.last_name}
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    Date joined: {'  ' + processDate(this.props.user.date_joined)}
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Col>
+                            <Col>
+                            <Card bg="dark" className="p-3">
+                                {this.state.showEditProfile ? 
+                                    <EditProfile switch={this.closeEdit} user={this.props.user} />
+                                    :<ProfileDetail switch={this.showEdit} user={this.props.user} />
+                                }
+                            </Card>
+                            </Col>
                     
                         <Col>
                             <Stack>
@@ -86,12 +72,7 @@ export class MyProfile extends Component {
 
 const mapStateToProps = state => ({
     user: state.auth.user,
-    rides: state.rides.rides
+    rides: state.rides.rides,
 })
-
-function processDate(datestring) {
-    var date = new Date(datestring);
-    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
-}
 
 export default connect(mapStateToProps, { deleteRide, getRides })(MyProfile);

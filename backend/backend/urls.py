@@ -20,16 +20,9 @@ from ridelist import views
 from accounts.views import UserView
 from django.views.generic.base import TemplateView
 
-router = routers.DefaultRouter()
-router.register(r'ridelist', views.RideView, 'ridelist')
-router.register(r'getuser', UserView, 'getuser')
-
 urlpatterns = [
     # user auth api
-    path("api/auth/", include("accounts.urls")),
-
-    # ridelist api
-    path('api/', include(router.urls)),
+    path("api/", include("accounts.urls")),
 
     # admin site
     path('admin/', admin.site.urls),

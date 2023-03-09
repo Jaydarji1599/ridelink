@@ -2,19 +2,6 @@ from twilio.rest import Client
 from random import randint
 from twilio.rest import Client
 
-def send_verification_code(phone_number, code):
-    account_sid = 'your_account_sid'
-    auth_token = 'your_auth_token'
-    client = Client(account_sid, auth_token)
-    message = client.messages \
-                    .create(
-                         body=f"Your verification code is {code}",
-                         from_='your_twilio_phone_number',
-                         to=phone_number
-                     )
-    print(message.sid)
-
-
 # Function to generate a 6-digit confirmation code
 def generate_phone_confirmation_code():
     return randint(100000, 999999)

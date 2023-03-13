@@ -10,7 +10,8 @@ export class AddModal extends Component {
         destination: '',
         date: '',
         time: '',
-        phone: ''
+        phone: '',
+        seats: 1
     }
 
     static propTypes = {
@@ -21,15 +22,15 @@ export class AddModal extends Component {
       e.preventDefault();
       const { source, destination, date, time, phone } = this.state;
       const ride = { source, destination, date, time, phone };
-      ride.name = this.props.user.first_name;
-      ride.userId = this.props.user.id;
+      ride.driver = this.props.user.id;
       this.props.addRide(ride);
       this.setState({
         source: '',
         destination: '',
         date: '',
         time: '',
-        phone: ''
+        phone: '',
+        seats: 1
       });
       this.props.close();
     };
@@ -79,6 +80,10 @@ export class AddModal extends Component {
                             <Form.Group>
                                 <Form.Label>Contact Number</Form.Label>
                                 <Form.Control type="tel" name="phone" onChange={this.onChange} />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Seats</Form.Label>
+                                <Form.Control type="number" name="seats" onChange={this.onChange} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>

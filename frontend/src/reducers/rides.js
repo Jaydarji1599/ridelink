@@ -1,8 +1,9 @@
-import { GET_RIDES, ADD_RIDE, DELETE_RIDE, EDIT_RIDE, FILTER_RIDES } from '../actions/types';
+import { GET_RIDES, ADD_RIDE, DELETE_RIDE, FILTER_RIDES, GET_PASSENGERS, ADD_PASSENGER, EDIT_RIDE, REMOVE_PASSENGER } from '../actions/types';
 
 const initialState = {
     rides: [],
-    filteredRides: []
+    filteredRides: [],
+    passengers: []
 }
 
 export default function(state = initialState, action) {
@@ -12,6 +13,21 @@ export default function(state = initialState, action) {
                 ...state,
                 rides: action.payload,
                 filteredRides: action.payload
+            }
+        case GET_PASSENGERS:
+            return {
+                ...state,
+                passengers: action.payload
+            }
+        case ADD_PASSENGER:
+            return {
+                ...state,
+                passengers: [...state.passengers, action.payload]
+            }
+        case REMOVE_PASSENGER:
+            return {
+                ...state,
+                passengers: state.passengers.filter((passenger) => passenger.id !== Number(action.payload))
             }
         case FILTER_RIDES:
             return {
@@ -41,19 +57,17 @@ export default function(state = initialState, action) {
                 rides: [...state.rides, action.payload],
                 filteredRides: [...state.rides, action.payload]
             }
-        case EDIT_RIDE:
-            // TODO:
-            // rides & filteredRides becomes the old state - old ride + new ride.
-            return {
-                ...state,
-                rides: [...state.rides, action.payload],
-                filteredRides: [...state.rides, action.payload]
-            }
         case DELETE_RIDE:
             return {
                 ...state,
                 rides: state.rides.filter((ride) => ride.id !== Number(action.payload)),
                 filteredRides: state.rides.filter((ride) => ride.id !== Number(action.payload))
+            };
+        case EDIT_RIDE: 
+            return {
+            ...state,
+            rides: [...state.rides.filter((ride) => ride.id !== Number(action.payload.id)), action.payload],
+            filteredRides: [...state.rides.filter((ride) => ride.id !== Number(action.payload.id)), action.payload]
             };
         default:
             return state;

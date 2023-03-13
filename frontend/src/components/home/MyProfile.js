@@ -1,13 +1,4 @@
 import React, { Component } from "react"
-<<<<<<< HEAD
-import { Card, Container, ListGroup, Row, Col, Button, Stack, Form } from "react-bootstrap";
-import { BsArrowRightCircle } from 'react-icons/bs';
-import { connect } from 'react-redux';
-import { deleteRide, getRides } from '../../actions/rides';
-import EditModal from "./myProfile/EditModal";
-import EditProfile from "./myProfile/EditProfile";
-import ProfileDetail from './myProfile/ProfileDetail';
-=======
 import { Card, Container, ListGroup, Row, Col, Button, Stack, Tabs, Tab } from "react-bootstrap";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { connect } from 'react-redux';
@@ -17,7 +8,6 @@ import EditProfile from "./myProfile/EditProfile";
 import ProfileDetail from './myProfile/ProfileDetail';
 import PassengerRideList from "./myProfile/PassengerRideList";
 
->>>>>>> cb2ec68c786b6e9639d2d5b76fc0ce8ba99eb35e
 
 export class MyProfile extends Component {
     state = {
@@ -34,7 +24,7 @@ export class MyProfile extends Component {
     closeEdit = () => this.setState({showEditProfile: false});
 
     renderItems = () => {
-        let filteredRides = this.props.rides.filter(ride => ride.userId === this.props.user.id);
+        let filteredRides = this.props.rides.filter(ride => ride.driver === this.props.user.id);
         return filteredRides.map(item => (
             <ListGroup.Item as="li" className="bg-dark d-flex justify-content-between mb-2">
                 <div className="stack-2">

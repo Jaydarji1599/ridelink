@@ -1,31 +1,46 @@
-import { useState, useEffect } from 'react';
-import { Modal, Button, ListGroup } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Modal, Button, ListGroup, Container } from 'react-bootstrap';
 import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { IoIosStar } from 'react-icons/io';
+import ReactStars from "react-rating-stars-component";
 
-export default function ProfileModal({ride}) {
+export default function ProfileModal({driver}) {
     const [show, setShow] = useState(false);
+
     const [user, setUser] = useState({});
+
+    const [rating, setRating] = useState(0);
+    const [ratingButton, setRatingButton] = useState(true);
+    const [ratingButtonText, setRatingButtonText] = useState("Leave Review");
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [rating, setRating] = useState(3);
-    
+
+    const handleRating = (newRating) => {
+        setRating(newRating);
+        setRatingButton(false);
+    };
+    const submitRating = () => {
+        setRatingButton(true);
+        setRatingButtonText("Review Submitted!")
+    };
+
     useEffect(() => {
-        axios.get(`/api/getuser/${ride.userId}/`)
+        axios.get(`/api/getuser/${driver}/`)
         .then((res) => {
             const user = res.data;
             setUser(user);
         })
-    }, [])
+    }, []);
 
     return (
         <>
-            <Link onClick={handleShow}> <span style={{display: 'flex', alignItems: 'center'}}><CgProfile /> {ride.name} <IoIosStar className="ml-1" /> {rating} </span></Link>
+            <Link onClick={handleShow}> <span style={{display: 'flex', alignItems: 'center'}}><CgProfile /> {user.first_name} <IoIosStar className="ml-1" /> {rating} </span></Link>
             <Modal show={show} onHide={handleClose}>
             <Modal.Header>
-                <Modal.Title>Driver Info:</Modal.Title>
+                <Modal.Title>User Info:</Modal.Title>
                 <Button variant="light" onClick={handleClose} className="btn-close">
                     <span aria-hidden="true">&times;</span>
                 </Button>
@@ -48,6 +63,17 @@ export default function ProfileModal({ride}) {
                         Date joined: {'  ' + processDate(user.date_joined)}
                     </ListGroup.Item>
                 </ListGroup>
+                <span className="align-items-center p-2 m-2" style={{display: "flex"}}>
+                    <ReactStars
+                        count={5}
+                        onChange={handleRating}
+                        size={24}
+                        disabled={true}
+                        />
+                    <Button disabled={ratingButton} onClick={submitRating} variant="success" className="ml-2">
+                        {ratingButtonText}
+                    </Button>
+                </span>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

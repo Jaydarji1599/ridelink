@@ -1,5 +1,12 @@
 Bugs:
     - fix form validation errors when opening/closing edit profile section 
-        - We want the SAVE button to update the user, then go back to profiledetail
         - We want the CLOSE to say DISCARD, and discard changes returning back to profiledetail.
             - **PROBLEMS COMES FROM FORM VALIDATION STICKING AROUND!!! NEED AWAIT OR NEW REDUX ACTION.
+
+Steps:
+ADD:
+- implement passenger in passenger pane 
+- start reviews implementation
+
+IMPORTANT:
+- only display rides NOT posted by user in available rides

@@ -3,29 +3,34 @@ import { ListGroup, Card, Button } from "react-bootstrap";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import { MapStateToProps } from "react-redux";
+import { removePassenger } from "../../../actions/rides";
+import PassengerRideDetail from "./PassengerList/PassengerRideDetail";
 
-export default class PassengerRideList extends Component {
+export class PassengerRideList extends Component {
+
+    onDelete = (e) => {
+        this.props.removePassenger(e.target.name);
+    }
+    renderItems = () => {
+        return this.props.passengers.map(item => (
+            <PassengerRideDetail passenger={item} name={item.id} onDelete={this.onDelete} />
+        ));
+    }
+
     render() {
         return (
             <ListGroup>
-                <ListGroup.Item as="li" className="bg-dark d-flex justify-content-between mb-2">
-                    <Link className="mt-2">
-                        <span style={{display: "inline-flex", alignItems: "center"}}>
-                            <FaUserCircle className="mr-2 ml-2" size={25}/>
-                            <h6>Jim</h6>
-                        </span>
-                    </Link>
-                    <div className="stack-2">
-                        <h6 style={{color: "white"}}>HALIFAX <BsArrowRightCircle /> MONCTION</h6>
-                        <Card.Subtitle className="mb-2 text-muted">2023-03-20, 12:00:00</Card.Subtitle>
-                    </div>
-                    <div>
-                        <Button variant="danger" size="md">
-                        Cancel
-                        </Button>
-                    </div>
-                </ListGroup.Item>
+                {this.renderItems()}
             </ListGroup>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    user: state.auth.user,
+    passengers: state.rides.passengers.filter(p => p.user === state.auth.user.id)
+});
+
+export default connect(mapStateToProps, { removePassenger })(PassengerRideList);

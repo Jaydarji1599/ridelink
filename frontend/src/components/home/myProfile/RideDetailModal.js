@@ -58,6 +58,7 @@ export class RideDetailModal extends Component {
                     backdrop="static"
                     keyboard={false}
                     size="lg"
+                    style={{ fontFamily: 'Secular One, sans-serif' }}
                 >
                     <Modal.Header>
                     <Modal.Title>Ride Details</Modal.Title>

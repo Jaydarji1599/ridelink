@@ -38,7 +38,7 @@ export default function ProfileModal({driver}) {
     return (
         <>
             <Link onClick={handleShow}> <span style={{display: 'flex', alignItems: 'center'}}><CgProfile /> {user.first_name} <IoIosStar className="ml-1" /> {rating} </span></Link>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} style={{ fontFamily: 'Secular One, sans-serif' }}>
             <Modal.Header>
                 <Modal.Title>User Info:</Modal.Title>
                 <Button variant="light" onClick={handleClose} className="btn-close">

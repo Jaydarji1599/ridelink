@@ -15,6 +15,7 @@ export default class ProfileDetail extends Component {
                 <h4 style={{color: "white"}}>My Profile</h4>
                 <div style={{color: "white"}} className="justify-content-between text-center m-2 text-color-white">
                     <FaUserCircle color="white" size={100} />
+                    <p />
                     <h6>{this.props.user.username}</h6>             
                     <StarRatings 
                         rating={this.state.rating}
@@ -22,6 +23,7 @@ export default class ProfileDetail extends Component {
                         starDimension="20px"
                         starSpacing="2px"
                     />
+                    <p />
                     <p>{this.state.numReviews} reviews</p>
                     <p>Date joined: {'  ' + processDate(this.props.user.date_joined)}</p>
                     <Button variant="success" onClick={this.props.switch}>Edit Info</Button>

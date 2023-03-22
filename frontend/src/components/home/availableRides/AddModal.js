@@ -46,12 +46,13 @@ export class AddModal extends Component {
                     onHide={this.props.close}
                     backdrop="static"
                     keyboard={false}
+                    style={{ fontFamily: 'Secular One, sans-serif' }}
                 >
                     <Modal.Header>
-                    <Modal.Title>Add your Trip!</Modal.Title>
-                    <Button variant="light" onClick={this.props.close} className="btn-close">
-                        <span aria-hidden="true">&times;</span>
-                    </Button>
+                    <Modal.Title style={{ fontFamily: 'Secular One, sans-serif' }}>Add your Trip!</Modal.Title>
+                        <Button variant="light" onClick={this.props.close} className="btn-close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
                     </Modal.Header>
                     <Modal.Body className="gap-3">
                         <Form className="gap-3">

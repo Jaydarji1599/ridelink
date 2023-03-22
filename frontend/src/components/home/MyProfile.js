@@ -8,6 +8,24 @@ import EditProfile from "./myProfile/EditProfile";
 import ProfileDetail from './myProfile/ProfileDetail';
 import PassengerRideList from "./myProfile/PassengerRideList";
 
+import {
+    MDBCol,
+    MDBContainer,
+    MDBRow,
+    MDBCard,
+    MDBCardText,
+    MDBCardBody,
+    MDBCardImage,
+    MDBBtn,
+    MDBBreadcrumb,
+    MDBBreadcrumbItem,
+    MDBProgress,
+    MDBProgressBar,
+    MDBIcon,
+    MDBListGroup,
+    MDBListGroupItem
+  } from 'mdb-react-ui-kit';
+  
 
 export class MyProfile extends Component {
     state = {
@@ -34,7 +52,7 @@ export class MyProfile extends Component {
                 <div>
                     <RideDetailModal ride={item} />
                     <Button variant="danger" name={item.id} onClick={this.onDelete} size="md">
-                    Delete
+                        Delete
                     </Button>
                 </div>
             </ListGroup.Item>
@@ -43,38 +61,39 @@ export class MyProfile extends Component {
 
     render() {
         return (
-            <>
-                <Card className="bg-success p-3 m-3 mt-3">
+            <section style={{ fontFamily: 'Secular One, sans-serif' }}>
+                <section className="p-3 m-3 mt-3" style={{ backgroundColor: '#e0ffe0' }}>
                     <Container className="m-2">
-                        <Row>
-                            <Col>
-                            <Card bg="dark" className="p-3">
-                                {this.state.showEditProfile ? 
-                                    <EditProfile switch={this.closeEdit} user={this.props.user} />
-                                    :<ProfileDetail switch={this.showEdit} user={this.props.user} />
-                                }
-                            </Card>
-                            </Col>
+                        <MDBRow>
+                            <MDBCol lg='6'>
+                                <Card bg="dark" className="p-3">
+                                    {this.state.showEditProfile ? 
+                                        <EditProfile switch={this.closeEdit} user={this.props.user} />
+                                        :<ProfileDetail switch={this.showEdit} user={this.props.user} />
+                                    }
+                                </Card>
+                                <p />
+                            </MDBCol>
                     
-                        <Col>
-                            <Stack>
-                                <h4>My Rides:</h4>
-                                <Tabs defaultActiveKey="driver">
-                                    <Tab eventKey="driver" title="Driver">
-                                        <ListGroup>
-                                            {this.renderItems()}
-                                        </ListGroup>
-                                    </Tab>
-                                    <Tab eventKey="passenger" title="Passenger" variant="dark">
-                                        <PassengerRideList />
-                                    </Tab>
-                                </Tabs>
-                            </Stack>
-                        </Col>
-                        </Row>
+                            <MDBCol lg='6'>
+                                <Stack>
+                                    <h4>My Rides:</h4>
+                                    <Tabs defaultActiveKey="driver">
+                                        <Tab eventKey="driver" title="Driver">
+                                            <ListGroup>
+                                                {this.renderItems()}
+                                            </ListGroup>
+                                        </Tab>
+                                        <Tab eventKey="passenger" title="Passenger" variant="dark">
+                                            <PassengerRideList />
+                                        </Tab>
+                                    </Tabs>
+                                </Stack>
+                            </MDBCol>
+                        </MDBRow>
                     </Container>
-                </Card>
-            </>
+                </section>
+            </section>
         )
     }
 }

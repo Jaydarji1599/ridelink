@@ -14,7 +14,8 @@ class RegisterView extends Component {
         password2: '',
         firstName: '',
         lastName: '',
-        phone: ''
+        phone: '',
+        phoneError: false
     }
 
     static propTypes = {
@@ -29,14 +30,23 @@ class RegisterView extends Component {
         const { username, email, firstName, lastName, password, password2, phone } = this.state;
         if (password !== password2) {
             this.state.pwdError = true
-        } else {
+        } 
+        else {
             this.props.register({ username, email, firstName, lastName, password, phone })
         }
     };
 
     onChange = (e) => {this.setState({ [e.target.name]: e.target.value })};
 
-    changePhone = (newPhone) => {this.setState({phone: newPhone.intlPhoneNumber})}
+    changePhone = (newPhone) => {
+        this.setState({phone: newPhone.intlPhoneNumber});
+        if (newPhone.valid) {
+            this.setState({phoneError: false});
+        }
+        else {
+            this.setState({phoneError: true});
+        }
+    }
 
     render() {
         if(this.props.isAuthenticated) {
@@ -60,12 +70,15 @@ class RegisterView extends Component {
                         <Form.Control type="name" placeholder="Last Name" name="lastName" onChange={this.onChange}/>
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupLastName">
-                    <IntlTelInput
-                        preferredCountries={['CA', 'US']}
-                        defaultCountry={'CA'}
-                        defaultValue={"+1"}
-                        onChange={(data) => this.changePhone(data)}
-                    />
+                        <IntlTelInput
+                            preferredCountries={['CA']}
+                            defaultCountry={'CA'}
+                            onChange={(data) => this.changePhone(data)}
+                            autoComplete="off"
+                        />
+                        {this.state.phoneError && (
+                        <p style={{color: '#FFCCCB'}}>Invalid phone number. Don't forget the 1!</p>
+                        )}
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupPassword">
                         <Form.Label style={{color: "white"}}>Password</Form.Label>

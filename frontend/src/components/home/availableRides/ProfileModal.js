@@ -73,7 +73,18 @@ export class ProfileModal extends Component {
         }
         return (
             <>
-                <Link onClick={this.handleShow}> <span style={{display: 'flex', alignItems: 'center'}}><CgProfile /> {this.state.user.first_name} <IoIosStar className="ml-1" /> {this.props.rating} </span></Link>
+                <Link onClick={this.handleShow}>
+                    <span style={{display: 'flex', alignItems: 'center'}}>
+                        <CgProfile />
+                        {this.state.user.first_name} 
+                        <IoIosStar className="ml-1" />
+                        {
+                            (this.props.numRatings === 0)
+                            ? <>No ratings.</>
+                            : <>this.props.rating</>
+                        }
+                    </span>
+                </Link>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header>
                         <Modal.Title>User Info:</Modal.Title>
@@ -99,7 +110,12 @@ export class ProfileModal extends Component {
                                 Date joined: {'  ' + processDate(this.state.user.date_joined)}
                             </ListGroup.Item>
                             <ListGroupItem>
-                                Rating: {this.props.rating} from {this.props.numRatings} ratings.
+                                Rating: 
+                                {
+                                    (this.props.numRatings === 0)
+                                    ? <>{' '} No ratings.</>
+                                    : <>{this.props.rating} from {this.props.numRatings} ratings.</>
+                                }
                             </ListGroupItem>
                         </ListGroup>
                         <h6>Rate User: </h6>

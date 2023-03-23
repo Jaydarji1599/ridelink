@@ -25,6 +25,7 @@ export class MyProfile extends Component {
 
     renderItems = () => {
         let filteredRides = this.props.rides.filter(ride => ride.driver === this.props.user.id);
+        if (filteredRides.length === 0) {return (<h3 className="p-2 text-center">No rides posted.</h3>)}
         return filteredRides.map(item => (
             <ListGroup.Item as="li" className="bg-dark d-flex justify-content-between mb-2">
                 <div className="stack-2">

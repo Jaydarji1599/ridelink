@@ -66,7 +66,8 @@ export const login = (username, password) => dispatch => {
 
 // REGISTER USER
 export const register = ({ username, email, firstName, lastName, password, phone }) => dispatch => {
-
+    // need to check if phone is valid FIRST
+    
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -94,6 +95,12 @@ export const register = ({ username, email, firstName, lastName, password, phone
                 }, 
                 config
             )
+            .then((res) => {
+                dispatch({
+                    type: REGISTER_SUCCESS,
+                    payload: res.data
+                });
+            })
             .catch(
                 (err => {
                     console.log(err);
@@ -102,10 +109,6 @@ export const register = ({ username, email, firstName, lastName, password, phone
                     })
                 })
             )
-            dispatch({
-                type: REGISTER_SUCCESS,
-                payload: res.data
-            });
         })
         .catch(err => {
             console.log(err);

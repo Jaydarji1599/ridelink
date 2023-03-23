@@ -25,7 +25,11 @@ export class ProfileDetail extends Component {
                         starDimension="20px"
                         starSpacing="2px"
                     />
-                    <p>{this.props.rating} from {this.props.numRatings} ratings</p>
+                    {
+                        (this.props.numRatings === 0)
+                        ? <p>No ratings yet!</p>
+                        : <p>{this.props.rating} from {this.props.numRatings} ratings</p>
+                    }
                     <p>Date joined: {'  ' + processDate(this.props.user.date_joined)}</p>
                     <Button variant="success" onClick={this.props.switch}>Edit Info</Button>
                 </div>

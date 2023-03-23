@@ -14,6 +14,7 @@ export class PassengerRideList extends Component {
         this.props.removePassenger(passengerid, ride, this.props.user.first_name, "passenger");
     }
     renderItems = () => {
+        if (this.props.passengers.length === 0) {return (<h3 className="p-2 text-center">No rides booked.</h3>)}
         return this.props.passengers.map(item => (
             <PassengerRideDetail passenger={item} name={item.id} onDelete={this.onDelete} curUser={this.props.user.id} />
         ));

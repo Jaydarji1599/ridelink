@@ -75,25 +75,6 @@ export class MyProfile extends Component {
                                 </Card>
                                 <p />
                             </MDBCol>
-                    
-<<<<<<< HEAD
-                        <Col>
-                            <Stack>
-                                <h4>My Rides:</h4>
-                                <Tabs defaultActiveKey="driver">
-                                    <Tab eventKey="driver" title="As Driver">
-                                        <ListGroup>
-                                            {this.renderItems()}
-                                        </ListGroup>
-                                    </Tab>
-                                    <Tab eventKey="passenger" title="As Passenger" variant="dark">
-                                        <PassengerRideList />
-                                    </Tab>
-                                </Tabs>
-                            </Stack>
-                        </Col>
-                        </Row>
-=======
                             <MDBCol lg='6'>
                                 <Stack>
                                     <h4>My Rides:</h4>
@@ -110,7 +91,6 @@ export class MyProfile extends Component {
                                 </Stack>
                             </MDBCol>
                         </MDBRow>
->>>>>>> 67dd52a0e6211a5d1c2bd5ba31817caccf7fc3b4
                     </Container>
                 </section>
             </section>

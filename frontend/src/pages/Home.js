@@ -5,31 +5,10 @@ import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";
 import MyProfile from "../components/home/MyProfile";
 import { TestSection } from "../components/home/TestSection";
-<<<<<<< HEAD
 import { connect } from "react-redux";
 import { getRides, getPassengers } from '../actions/rides';
 import { getRatings } from "../actions/auth";
-=======
-
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem
-} from 'mdb-react-ui-kit';
->>>>>>> 67dd52a0e6211a5d1c2bd5ba31817caccf7fc3b4
-
+import {MDBCol, MDBRow} from 'mdb-react-ui-kit';
 export class Home extends Component {
 
     async componentDidMount() {

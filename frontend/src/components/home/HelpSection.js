@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import { connect } from 'react-redux';
 import HelpCard from "./testComponents/HelpCard";
 
-export class MyProfile extends Component {
+export class HelpSection extends Component {
     static propTypes = {
         
     }
@@ -20,4 +20,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 })
     
-export default connect(mapStateToProps)(MyProfile);
+export default connect(mapStateToProps)(HelpSection);

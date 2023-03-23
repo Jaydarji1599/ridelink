@@ -8,7 +8,9 @@ import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
     UPDATE_PROFILE,
-    UPDATE_FAIL
+    UPDATE_FAIL,
+    ADD_RATING,
+    GET_RATINGS
 } from "../actions/types"
 
 const initialState = {
@@ -21,7 +23,8 @@ const initialState = {
     updateError: {
         show: false,
         message: {}
-    }
+    },
+    ratings: []
 }
 
 export default function(state = initialState, action) {
@@ -103,6 +106,16 @@ export default function(state = initialState, action) {
                     show: true,
                     message: JSON.parse(action.payload)
                 },
+            }
+        case GET_RATINGS:
+            return {
+                ...state,
+                ratings: action.payload
+            }
+        case ADD_RATING:
+            return {
+                ...state,
+                ratings: [...state.ratings, action.payload]
             }
         default:
             return state

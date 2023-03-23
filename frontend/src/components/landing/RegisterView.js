@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { register } from "../../actions/auth";
+import IntlTelInput from "react-bootstrap-intl-tel-input";
 
 class RegisterView extends Component {
     state = {
@@ -12,7 +13,8 @@ class RegisterView extends Component {
         password: '',
         password2: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        phone: ''
     }
 
     static propTypes = {
@@ -24,15 +26,17 @@ class RegisterView extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.state.pwdError = false;
-        const { username, email, firstName, lastName, password, password2 } = this.state;
+        const { username, email, firstName, lastName, password, password2, phone } = this.state;
         if (password !== password2) {
             this.state.pwdError = true
         } else {
-            this.props.register({ username, email, firstName, lastName, password })
+            this.props.register({ username, email, firstName, lastName, password, phone })
         }
     };
 
     onChange = (e) => {this.setState({ [e.target.name]: e.target.value })};
+
+    changePhone = (newPhone) => {this.setState({phone: newPhone.intlPhoneNumber})}
 
     render() {
         if(this.props.isAuthenticated) {
@@ -54,6 +58,14 @@ class RegisterView extends Component {
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupLastName">
                         <Form.Control type="name" placeholder="Last Name" name="lastName" onChange={this.onChange}/>
+                    </Form.Group>
+                    <Form.Group className="mb-2" controlId="formGroupLastName">
+                    <IntlTelInput
+                        preferredCountries={['CA', 'US']}
+                        defaultCountry={'CA'}
+                        defaultValue={"+1"}
+                        onChange={(data) => this.changePhone(data)}
+                    />
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formGroupPassword">
                         <Form.Label style={{color: "white"}}>Password</Form.Label>

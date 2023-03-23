@@ -2,11 +2,27 @@ Bugs:
     - fix form validation errors when opening/closing edit profile section 
         - We want the CLOSE to say DISCARD, and discard changes returning back to profiledetail.
             - **PROBLEMS COMES FROM FORM VALIDATION STICKING AROUND!!! NEED AWAIT OR NEW REDUX ACTION.
+            
+    - when ride deleted with passengers, crash; but in profiledetail review value stars. what gives?
+    - 0 ratings implementation needed.
+    - Contact not created on signup?
 
-Steps:
-ADD:
-- implement passenger in passenger pane 
-- start reviews implementation
-
-IMPORTANT:
+IMPORTANT****:
 - only display rides NOT posted by user in available rides
+
+
+Texts needed:
+- on ride post
+    NEED: driver phone number, source, destination
+- on booking (to driver, passengers.)
+    NEED: driver phone number, driver name, passenger name, passenger phone number, change.
+- on ride edit
+    NEED: passenger(s) phone number(s), driver name, source, destination
+- on ride deleted
+    NEED: passenger(s) phone number(s), driver name, source, destination, source, destination.
+- on passenger delete (if in ride details, tell passenger they have been removed; if in passenger ride list, tell driver.)
+    NEED: passenger name, driver name, driver phone number, source, destination.
+
+TODO:
+- implement passenger deletion texts
+- fix star rating bugs, edge cases.

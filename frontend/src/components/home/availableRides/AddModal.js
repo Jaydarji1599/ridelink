@@ -77,14 +77,6 @@ export class AddModal extends Component {
                                 <Form.Label>Time</Form.Label>
                                 <Form.Control type="time" name="time" onChange={this.onChange} />
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Contact Number</Form.Label>
-                                <Form.Control type="tel" name="phone" onChange={this.onChange} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Seats</Form.Label>
-                                <Form.Control type="number" name="seats" onChange={this.onChange} />
-                            </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>

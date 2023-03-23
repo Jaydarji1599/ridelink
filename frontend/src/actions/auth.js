@@ -10,7 +10,9 @@ import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
     UPDATE_PROFILE,
-    UPDATE_FAIL
+    UPDATE_FAIL,
+    ADD_RATING,
+    GET_RATINGS
 } from './types';
 
 // check token & load user
@@ -55,6 +57,7 @@ export const login = (username, password) => dispatch => {
             });
         })
         .catch(err => {
+            console.log(err);
             dispatch({
                 type: LOGIN_FAIL
             })
@@ -62,7 +65,7 @@ export const login = (username, password) => dispatch => {
 };
 
 // REGISTER USER
-export const register = ({ username, email, firstName, lastName, password }) => dispatch => {
+export const register = ({ username, email, firstName, lastName, password, phone }) => dispatch => {
 
     const config = {
         headers: {
@@ -81,6 +84,24 @@ export const register = ({ username, email, firstName, lastName, password }) => 
     
     axios.post('api/auth/register/', body, config)
         .then(res => {
+
+            // used to add contact info to database.
+            axios.post(
+                '/api/contacts/', 
+                {
+                    user: res.data.user.id,
+                    phone: phone
+                }, 
+                config
+            )
+            .catch(
+                (err => {
+                    console.log(err);
+                    dispatch({
+                        type: REGISTER_FAIL
+                    })
+                })
+            )
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
@@ -149,4 +170,27 @@ export const updateProfile = ({ username, email, firstName, lastName, pk }) => (
                 payload: err.response.request.responseText
             })
         })
+}
+
+// REVIEW ACITIONS
+export const addRating = (review) => dispatch => {
+    axios.post('/api/reviews/', review)
+    .then((res) => {
+        dispatch({
+            type: ADD_RATING,
+            payload: res.data
+        })
+    })
+    .catch( err => {
+        console.log(err);
+    })
+}
+export const getRatings = () => dispatch => {
+    axios.get('/api/reviews/')
+    .then(res => {
+        dispatch({
+            type: GET_RATINGS,
+            payload: res.data
+        })
+    })
 }

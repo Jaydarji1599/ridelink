@@ -61,7 +61,8 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 rides: state.rides.filter((ride) => ride.id !== Number(action.payload)),
-                filteredRides: state.rides.filter((ride) => ride.id !== Number(action.payload))
+                filteredRides: state.rides.filter((ride) => ride.id !== Number(action.payload)),
+                passengers: state.passengers.filter((passenger) => passenger.ride !== Number(action.payload))
             };
         case EDIT_RIDE: 
             return {

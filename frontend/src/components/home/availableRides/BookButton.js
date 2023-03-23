@@ -6,7 +6,6 @@ export class BookButton extends Component {
 
     state = {
         disable: this.props.disable,
-        
     }
 
 

@@ -2,11 +2,13 @@ import React, { Component } from "react"
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRides, filterRides, addPassenger, getPassengers } from '../../actions/rides';
+import { filterRides, addPassenger } from '../../actions/rides';
 import { BsArrowRightCircle, BsSearch, BsPlusCircle } from 'react-icons/bs';
 import AddModal from "./availableRides/AddModal";
 import SearchModal from "./availableRides/SearchModal";
 import ProfileModal from "./availableRides/ProfileModal";
+import axios from "axios";
+
 
 export class AvailableRides extends Component {
 
@@ -25,24 +27,20 @@ export class AvailableRides extends Component {
 
     static propTypes = {
         rides: PropTypes.array.isRequired,
-        passengers: PropTypes.array.isRequired
-    }
-  
-    async componentDidMount() {
-        this.props.getRides();
-        this.props.getPassengers();
+        passengers: PropTypes.array.isRequired,
+        ratings: PropTypes.array.isRequired
     }
 
-    submitPassenger = (e) => {
-        this.state.passenger.ride = Number(e.target.name);
-        this.props.addPassenger(this.state.passenger);
+    submitPassenger = (ride) => {
+        const passenger = {ride: ride.id, user: this.props.user.id}
+        this.props.addPassenger(passenger, this.props.user, ride);
+
         this.state.passenger.ride = null;
-        e.target.disabled = true;
-        e.target.innerHTML = "Booked";
+        //e.target.disabled = true;
+        //e.target.innerHTML = "Booked";
     }
 
     isBooked = (e) => {
-        console.log("in func")
         if (this.props.passengers.some(p => ((p.ride === e.target.name) && (p.user === this.props.user.id)))) {
           return true;
         }
@@ -76,9 +74,9 @@ export class AvailableRides extends Component {
                 <Card.Body>
                   <Card.Subtitle className="mb-2 text-muted">{item.date}, {item.time}</Card.Subtitle>
                   <Card.Text>
-                    <ProfileModal driver={item.driver} />
+                    <ProfileModal driver={item.driver} curUser={this.props.user.id} />
                   </Card.Text>
-                  <Button disabled={isBooked(item.id)} variant="success" name={item.id} className="btn-block" size="md" onClick={this.submitPassenger}>
+                  <Button disabled={isBooked(item.id)} variant="success" name={item.id} ride={item} className="btn-block" size="md" onClick={() => this.submitPassenger(item)}>
                     {isBooked(item.id)? "Booked": "Book"}
                   </Button>
                 </Card.Body>
@@ -115,7 +113,8 @@ export class AvailableRides extends Component {
 const mapStateToProps = state => ({
     rides: state.rides.filteredRides,
     user: state.auth.user,
-    passengers: state.rides.passengers
+    passengers: state.rides.passengers,
+    ratings: state.auth.ratings
 })
     
-export default connect(mapStateToProps, {getRides, filterRides, addPassenger, getPassengers})(AvailableRides);
+export default connect(mapStateToProps, {filterRides, addPassenger})(AvailableRides);

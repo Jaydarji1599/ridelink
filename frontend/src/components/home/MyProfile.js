@@ -60,12 +60,12 @@ export class MyProfile extends Component {
                             <Stack>
                                 <h4>My Rides:</h4>
                                 <Tabs defaultActiveKey="driver">
-                                    <Tab eventKey="driver" title="Driver">
+                                    <Tab eventKey="driver" title="As Driver">
                                         <ListGroup>
                                             {this.renderItems()}
                                         </ListGroup>
                                     </Tab>
-                                    <Tab eventKey="passenger" title="Passenger" variant="dark">
+                                    <Tab eventKey="passenger" title="As Passenger" variant="dark">
                                         <PassengerRideList />
                                     </Tab>
                                 </Tabs>

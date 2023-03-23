@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Passenger, Ride, Review
+from .models import Passenger, Ride, Review, Contact
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -86,23 +86,28 @@ class RideSerializer(serializers.ModelSerializer):
             'destination',
             'date',
             'time',
-            'phone',
             'driver',
-            'seats',
-            'visible'
         )
-        read_only_fields = ('visible',)
-
-
-class PassengerSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Passenger
-        fields = ('id', 'user', 'ride')
 
 
 class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('id', 'driver', 'reviewer', 'score', 'comment')
+        fields = ('id', 'driver', 'reviewer', 'score')
+
+
+class ContactSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Contact
+        fields = ('user', 'phone')
+
+
+class PassengerSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField(read_only=True, source='user.contact.phone')
+    class Meta:
+        model = Passenger
+        fields = ('id', 'user', 'ride', 'phone')
+
+ 

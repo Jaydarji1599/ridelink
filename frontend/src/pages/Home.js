@@ -5,8 +5,18 @@ import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";
 import MyProfile from "../components/home/MyProfile";
 import { TestSection } from "../components/home/TestSection";
+import { connect } from "react-redux";
+import { getRides, getPassengers } from '../actions/rides';
+import { getRatings } from "../actions/auth";
+
 export class Home extends Component {
 
+    async componentDidMount() {
+      this.props.getRides();
+      this.props.getPassengers();
+      this.props.getRatings();
+    }
+    
     render() {
       return (
         <>
@@ -44,4 +54,4 @@ export class Home extends Component {
     }
   }
 
-export default Home;
+export default connect(null, {getRides, getPassengers, getRatings})(Home);

@@ -4,17 +4,13 @@ import PassengerDetail from "./PassengerDetail";
 import { connect } from "react-redux";
 import { MapStateToProps } from "react-redux";
 import { removePassenger } from "../../../../actions/rides";
+import axios from "axios";
 
 export class PassengerList extends Component {
 
-    onDelete = (id) => {
-        this.props.removePassenger(id);
-    }
-
     renderItems = () => {
-        console.log(this.props.passengers);
         return this.props.passengers.filter(p => p.ride === this.props.ride.id).map(item => (
-            <PassengerDetail ride={this.props.ride} passenger={item} onDelete={this.onDelete} />
+            <PassengerDetail ride={this.props.ride} passenger={item} curUser={this.props.user.id} />
         ));
     }
 
@@ -31,7 +27,8 @@ export class PassengerList extends Component {
 
 
 const mapStateToProps = state => ({
-    passengers: state.rides.passengers
+    passengers: state.rides.passengers,
+    user: state.auth.user
 })
 
 

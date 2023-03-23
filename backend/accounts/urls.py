@@ -1,7 +1,7 @@
 from knox import views as knox_views
 from accounts.api import LoginAPI, RegisterAPI, UserAPI
 from django.urls import path, include
-from .views import UpdateProfileView, RideView, UserView, ReviewView, PassengerView
+from .views import UpdateProfileView, RideView, UserView, ReviewView, PassengerView, ContactView
 from rest_framework import routers
 
 
@@ -10,6 +10,7 @@ router.register(r'ridelist', RideView, 'ridelist')
 router.register(r'getuser', UserView, 'getuser')
 router.register(r'reviews', ReviewView, 'reviews')
 router.register(r'passengers', PassengerView, 'passengers')
+router.register(r'contacts', ContactView, 'contacts')
 
 
 urlpatterns = [

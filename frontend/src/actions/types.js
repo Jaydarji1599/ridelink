@@ -18,3 +18,6 @@ export const UPDATE_FAIL = "UPDATE_FAIL";
 export const GET_PASSENGERS = "GET_PASSENGERS";
 export const ADD_PASSENGER = "ADD_PASSENGER";
 export const REMOVE_PASSENGER = "REMOVE_PASSENGER";
+
+export const ADD_RATING = "ADD_RATING";
+export const GET_RATINGS = "GET_RATINGS";

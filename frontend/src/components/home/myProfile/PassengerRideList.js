@@ -10,12 +10,12 @@ import PassengerRideDetail from "./PassengerList/PassengerRideDetail";
 
 export class PassengerRideList extends Component {
 
-    onDelete = (e) => {
-        this.props.removePassenger(e.target.name);
+    onDelete = (passengerid, ride) => {
+        this.props.removePassenger(passengerid, ride, this.props.user.first_name, "passenger");
     }
     renderItems = () => {
         return this.props.passengers.map(item => (
-            <PassengerRideDetail passenger={item} name={item.id} onDelete={this.onDelete} />
+            <PassengerRideDetail passenger={item} name={item.id} onDelete={this.onDelete} curUser={this.props.user.id} />
         ));
     }
 

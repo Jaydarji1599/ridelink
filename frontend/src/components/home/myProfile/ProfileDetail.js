@@ -18,6 +18,7 @@ export class ProfileDetail extends Component {
                 <h4 style={{color: "white"}}>My Profile</h4>
                 <div style={{color: "white"}} className="justify-content-between text-center m-2 text-color-white">
                     <FaUserCircle color="white" size={100} />
+                    <p />
                     <h6>{this.props.user.username}</h6>             
                     <StarRatings 
                         rating={this.state.rating}
@@ -25,11 +26,16 @@ export class ProfileDetail extends Component {
                         starDimension="20px"
                         starSpacing="2px"
                     />
+<<<<<<< HEAD
                     {
                         (this.props.numRatings === 0)
                         ? <p>No ratings yet!</p>
                         : <p>{this.props.rating} from {this.props.numRatings} ratings</p>
                     }
+=======
+                    <p />
+                    <p>{this.state.numReviews} reviews</p>
+>>>>>>> 67dd52a0e6211a5d1c2bd5ba31817caccf7fc3b4
                     <p>Date joined: {'  ' + processDate(this.props.user.date_joined)}</p>
                     <Button variant="success" onClick={this.props.switch}>Edit Info</Button>
                 </div>

@@ -5,9 +5,30 @@ import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";
 import MyProfile from "../components/home/MyProfile";
 import { TestSection } from "../components/home/TestSection";
+<<<<<<< HEAD
 import { connect } from "react-redux";
 import { getRides, getPassengers } from '../actions/rides';
 import { getRatings } from "../actions/auth";
+=======
+
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
+>>>>>>> 67dd52a0e6211a5d1c2bd5ba31817caccf7fc3b4
 
 export class Home extends Component {
 
@@ -19,19 +40,19 @@ export class Home extends Component {
     
     render() {
       return (
-        <>
+        <section style={{ backgroundColor: '#e0ffe0' }}>
           <RideLinkHeader />
           <Tab.Container defaultActiveKey="#" fluid>
-            <Row>
-              <Col sm={2}>
+            <MDBRow>
+              <MDBCol md='2'>
                 <ListGroup variant="flush" className="flex-column">
-                  <ListGroup.Item variant="dark" action href="#">Rides</ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#myprofile">My Profile</ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#help">Help</ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#test">Test Section</ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#" style={{ backgroundColor: '#5bd25b' }}><strong>Rides</strong></ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#myprofile" style={{ backgroundColor: '#5bd25b' }}><strong>My Profile</strong></ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#help" style={{ backgroundColor: '#5bd25b' }}><strong>Help</strong></ListGroup.Item>
+                  <ListGroup.Item variant="dark" action href="#test" style={{ backgroundColor: '#5bd25b' }}><strong>Test Section</strong></ListGroup.Item>
                 </ListGroup>
-              </Col>
-              <Col>
+              </MDBCol>
+              <MDBCol md='10'>
                 <Tab.Content>
                   <Tab.Pane eventKey="#">
                     <AvailableRides />
@@ -46,10 +67,10 @@ export class Home extends Component {
                     <TestSection />
                   </Tab.Pane>
                 </Tab.Content>
-              </Col>
-            </Row>
+              </MDBCol>
+            </MDBRow>
           </Tab.Container>
-          </>
+        </section>
       )
     }
   }

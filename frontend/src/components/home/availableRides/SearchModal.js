@@ -33,6 +33,7 @@ export class SearchModal extends Component {
                     onHide={this.props.close}
                     backdrop="static"
                     keyboard={false}
+                    style={{ fontFamily: 'Secular One, sans-serif' }}
                 >
                     <Modal.Header>
                     <Modal.Title>Search Rides: </Modal.Title>

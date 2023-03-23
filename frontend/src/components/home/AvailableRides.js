@@ -87,25 +87,25 @@ export class AvailableRides extends Component {
 
       render() {
         return (
-            <>
-                <Card className="bg-success p-3 m-3 mt-3">
+            <section style={{ fontFamily: 'Secular One, sans-serif' }}>
+                <section className="p-3 m-3 mt-3" style={{ backgroundColor: '#e0ffe0' }}>
                     <Container className="m-2">
                         <div className='d-flex align-items-center justify-content-between m-2'>
-                            <h2 style={{color: 'white'}}>Available Rides:</h2>
-                            <div>
-                              <Button variant="dark my-auto mr-2" onClick={this.openAddModal}><b>New ride</b> <BsPlusCircle className="ml-2 mt-2 mb-2" /></Button>
-                              <Button variant="outline-light my-auto" onClick={this.openSearchModal}><b>Search</b> <BsSearch className="m-2" /></Button>
+                            <h2>Available Rides:</h2>
+                            <div style={{ marginLeft: '0px' }}>
+                              <Button variant="success my-auto mr-2" onClick={this.openAddModal}><b>New ride</b> <BsPlusCircle className="ml-2 mt-2 mb-2" /></Button>
+                              <Button variant="dark my-auto" onClick={this.openSearchModal}><b>Search</b> <BsSearch className="m-2" /></Button>
                             </div>
                         </div>
                         <Row xs={1} md={4}>
                             {this.renderItems()}
                         </Row>
                     </Container>
-                </Card>
+                </section>
 
                 <AddModal show={this.state.showAddModal} close={this.closeAddModal} />
                 <SearchModal show={this.state.showSearchModal} close={this.closeSearchModal} />
-            </>
+            </section>
         )
       }
 }

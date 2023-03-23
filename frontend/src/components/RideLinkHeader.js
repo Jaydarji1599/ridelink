@@ -14,15 +14,15 @@ export class RideLinkHeader extends Component {
         
 
         return (
-                <Navbar bg="dark" variant="dark">
+                <Navbar variant="dark" style={{ backgroundColor: '#006400' }}>
                     <Container>
-                    <Navbar.Brand>
-                        <MdDirectionsCarFilled />{' '}
-                        RideLink
-                    </Navbar.Brand>
-                    <Nav onClick={this.props.logout} className="me-auto" style={{color: 'white'}}>
-                        <Nav.Link>Log out</Nav.Link>
-                    </Nav>
+                        <Navbar.Brand>
+                            <MdDirectionsCarFilled />{' '}
+                            <strong>RideLink</strong>
+                        </Navbar.Brand>
+                        <Nav onClick={this.props.logout} className="me-auto" style={{color: 'white'}}>
+                            <Nav.Link><strong>Log out</strong></Nav.Link>
+                        </Nav>
                     </Container>
                 </Navbar>
         )

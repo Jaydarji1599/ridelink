@@ -4,11 +4,11 @@ import RideLinkHeader from "../components/RideLinkHeader";
 import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";
 import MyProfile from "../components/home/MyProfile";
-import { TestSection } from "../components/home/TestSection";
 import { connect } from "react-redux";
 import { getRides, getPassengers } from '../actions/rides';
 import { getRatings } from "../actions/auth";
 import {MDBCol, MDBRow} from 'mdb-react-ui-kit';
+
 export class Home extends Component {
 
     async componentDidMount() {
@@ -19,16 +19,15 @@ export class Home extends Component {
     
     render() {
       return (
-        <section style={{ backgroundColor: '#e0ffe0' }}>
+        <section className="bg-section">
           <RideLinkHeader />
           <Tab.Container defaultActiveKey="#" fluid>
             <MDBRow>
-              <MDBCol md='2'>
-                <ListGroup variant="flush" className="flex-column">
-                  <ListGroup.Item variant="dark" action href="#" style={{ backgroundColor: '#5bd25b' }}><strong>Rides</strong></ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#myprofile" style={{ backgroundColor: '#5bd25b' }}><strong>My Profile</strong></ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#help" style={{ backgroundColor: '#5bd25b' }}><strong>Help</strong></ListGroup.Item>
-                  <ListGroup.Item variant="dark" action href="#test" style={{ backgroundColor: '#5bd25b' }}><strong>Test Section</strong></ListGroup.Item>
+              <MDBCol md='2' className="nav-col bg-dark pr-0">
+                <ListGroup variant="flush" className="flex-column mr-0">
+                  <ListGroup.Item action href="#"><strong>Rides</strong></ListGroup.Item>
+                  <ListGroup.Item action href="#myprofile"><strong>My Profile</strong></ListGroup.Item>
+                  <ListGroup.Item action href="#help"><strong>Help</strong></ListGroup.Item>
                 </ListGroup>
               </MDBCol>
               <MDBCol md='10'>
@@ -41,9 +40,6 @@ export class Home extends Component {
                   </Tab.Pane>
                   <Tab.Pane eventKey="#help">
                     <HelpSection />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="#test">
-                    <TestSection />
                   </Tab.Pane>
                 </Tab.Content>
               </MDBCol>

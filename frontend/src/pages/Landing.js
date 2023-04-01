@@ -16,11 +16,10 @@ class Landing extends Component {
       this.setState({view: v});
     };
 
-    //onChange = (e) => this.setState({ [e.target.name]: e.target.value });
     render() {
       return (
         <>
-        <Container className="min-vh-100 bg-dark" fluid>
+        <Container style={{ fontFamily: 'Secular One, sans-serif'}} className="min-vh-100 bg-dark" fluid>
           <Row className="min-vh-100 justify-content-center" style={{
                 backgroundImage: `url(${bg_landing})`,
                 backgroundSize: "cover"

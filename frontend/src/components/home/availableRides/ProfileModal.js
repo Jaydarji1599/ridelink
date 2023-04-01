@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, ListGroup, Container, ListGroupItem } from 'react-bootstrap';
+import { Modal, Button, ListGroup, Container, ListGroupItem, Row, Col } from 'react-bootstrap';
 import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -19,15 +19,15 @@ export class ProfileModal extends Component {
     }
 
     handleClose = () => {
-        this.setState({show: false});
+        this.setState({ show: false });
     }
-    handleShow = () => this.setState({show: true})
+    handleShow = () => this.setState({ show: true })
 
     handleRating = (newRating) => {
         if (this.props.ratingCompleted == false) {
-            this.setState({ratingButtonDisable: false});
+            this.setState({ ratingButtonDisable: false });
         }
-        this.setState({curRating: newRating})
+        this.setState({ curRating: newRating })
     };
     submitRating = () => {
         const driverId = this.props.driver;
@@ -48,9 +48,9 @@ export class ProfileModal extends Component {
 
     componentDidMount() {
         axios.get(`/api/getuser/${this.props.driver}/`)
-        .then((res) => {
-            this.setState({user: res.data});
-        })
+            .then((res) => {
+                this.setState({ user: res.data });
+            })
 
         if (this.props.ratingCompleted) {
             this.setState({
@@ -66,34 +66,34 @@ export class ProfileModal extends Component {
         }
         else {
             stars = <ReactStars
-            count={5}
-            onChange={this.handleRating}
-            size={24}
+                count={5}
+                onChange={this.handleRating}
+                size={24}
             />
         }
         return (
             <>
-                <Link onClick={this.handleShow}>
-                    <span style={{display: 'flex', alignItems: 'center'}}>
+                <Link className="profile-link" onClick={this.handleShow}>
+                    <span style={{ display: 'flex', alignItems: 'center' }}>
                         <CgProfile />
-                        {this.state.user.first_name} 
+                        {this.state.user.first_name}
                         <IoIosStar className="ml-1" />
                         {
                             (this.props.numRatings === 0)
-                            ? <>No ratings.</>
-                            : <>this.props.rating</>
+                                ? <>No ratings.</>
+                                : <>{this.props.rating}</>
                         }
                     </span>
                 </Link>
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal className='custom-modal' show={this.state.show} onHide={this.handleClose} style={{ fontFamily: 'Secular One, sans-serif' }}>
                     <Modal.Header>
                         <Modal.Title>User Info:</Modal.Title>
-                        <Button variant="light" onClick={this.handleClose} className="btn-close">
+                        <Button variant="dark" onClick={this.handleClose} className="btn-close">
                             <span aria-hidden="true">&times;</span>
                         </Button>
                     </Modal.Header>
                     <Modal.Body>
-                        <ListGroup>
+                        <ListGroup style={{ color: "black" }}>
                             <ListGroup.Item>
                                 Username: {'  ' + this.state.user.username}
                             </ListGroup.Item>
@@ -110,27 +110,25 @@ export class ProfileModal extends Component {
                                 Date joined: {'  ' + processDate(this.state.user.date_joined)}
                             </ListGroup.Item>
                             <ListGroupItem>
-                                Rating: 
+                                Rating:
                                 {
                                     (this.props.numRatings === 0)
-                                    ? <>{' '} No ratings.</>
-                                    : <>{this.props.rating} from {this.props.numRatings} ratings.</>
+                                        ? <>{' '} No ratings.</>
+                                        : <>{this.props.rating} from {this.props.numRatings} ratings.</>
                                 }
                             </ListGroupItem>
+                            <ListGroupItem>
+                                <h6>Rate User: </h6>
+                                <span className="align-items-center p-2 m-2" style={{ display: "flex" }}>
+                                    {stars}
+                                    <Button disabled={this.state.ratingButtonDisable} onClick={this.submitRating} variant="primary" className="ml-2">
+                                        {this.state.ratingButtonText}
+                                    </Button>
+                                </span>
+                            </ListGroupItem>
                         </ListGroup>
-                        <h6>Rate User: </h6>
-                        <span className="align-items-center p-2 m-2" style={{display: "flex"}}>
-                            {stars}
-                            <Button disabled={this.state.ratingButtonDisable} onClick={this.submitRating} variant="success" className="ml-2">
-                                {this.state.ratingButtonText}
-                            </Button>
-                        </span>
+
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
                 </Modal>
             </>
         )
@@ -141,8 +139,8 @@ function processDate(datestring) {
     var date = new Date(datestring);
     return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 }
-function average(arr) { 
-    return (arr.reduce( ( p, c ) => p + c, 0 ) / arr.length).toFixed(1);
+function average(arr) {
+    return (arr.reduce((p, c) => p + c, 0) / arr.length).toFixed(1);
 };
 
 function checkIfReviewed(arr, curID) {

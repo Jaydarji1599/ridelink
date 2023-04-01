@@ -1,4 +1,4 @@
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { filterRides, getRides } from '../../../actions/rides';
@@ -10,11 +10,16 @@ export class SearchModal extends Component {
         destination: '',
         startDate: '',
         endDate: '',
+        loading: false
     }
 
     onSubmit = (e) => {
-        this.props.filterRides(this.state);
-        this.props.close();
+        this.setState({loading: true});
+        setTimeout(() => {
+            this.props.filterRides(this.state);
+            this.setState({loading: false});
+            this.props.close();
+        }, 1000);
       };
 
     reset = (e) => {
@@ -34,10 +39,11 @@ export class SearchModal extends Component {
                     backdrop="static"
                     keyboard={false}
                     style={{ fontFamily: 'Secular One, sans-serif' }}
+                    className="search-modal"
                 >
                     <Modal.Header>
                     <Modal.Title>Search Rides: </Modal.Title>
-                    <Button variant="light" onClick={this.props.close} className="btn-close">
+                    <Button variant="primary" onClick={this.props.close} className="btn-close">
                         <span aria-hidden="true">&times;</span>
                     </Button>
                     </Modal.Header>
@@ -50,6 +56,7 @@ export class SearchModal extends Component {
                                         {generateOptionsFromLocations(LOCATIONS)}
                                     </Form.Control>
                                 </Form.Group>
+                                <br/>
                                 <Form.Group>
                                     <Form.Label>Destination</Form.Label>
                                     <Form.Control placeholder="Select destination city" as="select" name="destination" onChange={this.onChange}>
@@ -57,20 +64,21 @@ export class SearchModal extends Component {
                                         {generateOptionsFromLocations(LOCATIONS)}
                                     </Form.Control>
                                 </Form.Group>
+                                <br/>
                                 <Form.Group>
                                     <Form.Label>Start Date</Form.Label>
                                     <Form.Control type="date" name="startDate" onChange={this.onChange} />
+                                    <br/>
                                     <Form.Label>End Date</Form.Label>
                                     <Form.Control type="date" name="endDate" onChange={this.onChange} />
                                 </Form.Group>
                             </Form>
+                            <br/>
+                            <Button variant="success" onClick={this.onSubmit} className="mr-2">
+                                {this.state.loading? <Spinner animation="border" size="sm" /> : 'Search'}
+                            </Button>
+                            <Button variant="outline-dark" onClick={this.reset}>Reset</Button>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="dark" onClick={this.reset}>Reset filters</Button>
-                    <Button variant="success" onClick={this.onSubmit}>
-                        Search
-                    </Button>
-                    </Modal.Footer>
                 </Modal>
     
             </>

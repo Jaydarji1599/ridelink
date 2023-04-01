@@ -12,7 +12,6 @@ router.register(r'reviews', ReviewView, 'reviews')
 router.register(r'passengers', PassengerView, 'passengers')
 router.register(r'contacts', ContactView, 'contacts')
 
-
 urlpatterns = [
 
     # Auth url patterns

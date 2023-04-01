@@ -19,7 +19,10 @@ const initialState = {
     isLoading: false,
     user: null,
     loginError: false,
-    registrationError: false,
+    registrationError: {
+        show: false,
+        message: {}
+    },
     updateError: {
         show: false,
         message: {}
@@ -63,6 +66,7 @@ export default function(state = initialState, action) {
                 loginError: true
             }
         case REGISTER_FAIL:
+            console.log(action.payload);
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -70,7 +74,10 @@ export default function(state = initialState, action) {
                 user: null,
                 isAuthenticated: false,
                 isLoading: false,
-                registrationError: true
+                registrationError: {
+                    show: true,
+                    message: JSON.parse(action.payload)
+                },
             }
         case AUTH_ERROR:
         case LOGOUT_SUCCESS:

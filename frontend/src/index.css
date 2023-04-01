@@ -26,3 +26,62 @@ code {
 summary:hover {
 	background-color: #a9e9a9;
 }
+
+.list-group-item.active {
+  background-color: #2b2b2b; /* change this to your desired color */
+}
+
+.nav-tabs .nav-link {
+  background-color: #c2c2c2 !important;
+  color: #000000 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #dddddd !important;
+  border-bottom: solid 0px #c2c2c2 !important;
+}
+
+.custom-modal .modal-content {
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+
+.search-modal .modal-content {
+  background-color: #93cb93;
+  color: #2e2e2e;
+}
+
+.profile-link {
+  color: #93cb93;
+}
+.link:hover {
+  color: #93cb93
+}
+
+/* Default height for the element */
+.nav-col {
+  height: 88.5vh;
+}
+
+.bg-section {
+  background-color: #93cb93;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 767px) {
+  .nav-col {
+    height: 145px; /* Change the height for mobile devices */
+  }
+  .bg-section {
+    background-color: #93cb93;
+    height: 100vh;
+  }
+}
+

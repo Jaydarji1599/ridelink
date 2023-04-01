@@ -1,0 +1,10 @@
+
+$theme-colors: (
+  "success": #dddddd,
+  "dark": #2e2e2e,
+  "primary": #93cb93,
+  "light-box": #a9eda9,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';

@@ -62,37 +62,33 @@ export class MyProfile extends Component {
 
     render() {
         return (
-            <section style={{ fontFamily: 'Secular One, sans-serif' }}>
-                <section className="p-3 m-3 mt-3" style={{ backgroundColor: '#e0ffe0' }}>
-                    <Container className="m-2">
-                        <MDBRow>
-                            <MDBCol lg='6'>
-                                <Card bg="dark" className="p-3">
-                                    {this.state.showEditProfile ? 
-                                        <EditProfile switch={this.closeEdit} user={this.props.user} />
-                                        :<ProfileDetail switch={this.showEdit} user={this.props.user} />
-                                    }
-                                </Card>
-                                <p />
-                            </MDBCol>
-                            <MDBCol lg='6'>
-                                <Stack>
-                                    <h4>My Rides:</h4>
-                                    <Tabs defaultActiveKey="driver">
-                                        <Tab eventKey="driver" title="Driver">
-                                            <ListGroup>
-                                                {this.renderItems()}
-                                            </ListGroup>
-                                        </Tab>
-                                        <Tab eventKey="passenger" title="Passenger" variant="dark">
-                                            <PassengerRideList />
-                                        </Tab>
-                                    </Tabs>
-                                </Stack>
-                            </MDBCol>
-                        </MDBRow>
-                    </Container>
-                </section>
+            <section style={{ fontFamily: 'Secular One, sans-serif' }} className="mt-4 mr-4">
+                    <MDBRow>
+                        <MDBCol lg='6'>
+                            <Card bg="dark" className="p-3">
+                                {this.state.showEditProfile ? 
+                                    <EditProfile switch={this.closeEdit} user={this.props.user} />
+                                    :<ProfileDetail switch={this.showEdit} user={this.props.user} />
+                                }
+                            </Card>
+                            <p />
+                        </MDBCol>
+                        <MDBCol lg='6'>
+                            <Stack>
+                                <h4 className={{color: "#2e2e2e"}}>My Rides:</h4>
+                                <Tabs defaultActiveKey="driver">
+                                    <Tab eventKey="driver" title="Driver">
+                                        <ListGroup>
+                                            {this.renderItems()}
+                                        </ListGroup>
+                                    </Tab>
+                                    <Tab eventKey="passenger" title="Passenger" variant="dark">
+                                        <PassengerRideList />
+                                    </Tab>
+                                </Tabs>
+                            </Stack>
+                        </MDBCol>
+                    </MDBRow>
             </section>
         )
     }

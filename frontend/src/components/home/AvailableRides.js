@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterRides, addPassenger } from '../../actions/rides';
 import { BsArrowRightCircle, BsSearch, BsPlusCircle } from 'react-icons/bs';
+import {HiArrowSmRight} from 'react-icons/hi';
 import AddModal from "./availableRides/AddModal";
 import SearchModal from "./availableRides/SearchModal";
 import ProfileModal from "./availableRides/ProfileModal";
@@ -21,8 +22,11 @@ export class AvailableRides extends Component {
         passenger: {
           ride: null,
           user: this.props.user.id
-        }
-      }
+        },
+
+        rideCols: 4
+      };
+      window.addEventListener('resize', this.handleZoom);
     }
 
     static propTypes = {
@@ -36,8 +40,15 @@ export class AvailableRides extends Component {
         this.props.addPassenger(passenger, this.props.user, ride);
 
         this.state.passenger.ride = null;
-        //e.target.disabled = true;
-        //e.target.innerHTML = "Booked";
+    }
+
+    handleZoom = () => {
+      if (window.innerWidth >= 1750) {
+        this.setState({rideCols: 6});
+      }
+      else {
+        this.setState({rideCols: 4});
+      }
     }
 
     isBooked = (e) => {
@@ -70,7 +81,12 @@ export class AvailableRides extends Component {
         return this.props.rides.map(item => (
             <Col>
               <Card key={item.id} bg="dark" text="white" className="mb-2">
-                <Card.Header>{item.source} <BsArrowRightCircle /> {item.destination}</Card.Header>
+                <Card.Header className="align-items-center">
+                  {item.source}
+                  <HiArrowSmRight color="white" className="ml-2" />
+                  <br/>
+                  {item.destination}
+                  </Card.Header>
                 <Card.Body>
                   <Card.Subtitle className="mb-2 text-muted">{item.date}, {item.time}</Card.Subtitle>
                   <Card.Text>
@@ -87,23 +103,32 @@ export class AvailableRides extends Component {
 
       render() {
         return (
-            <Card style={{ fontFamily: 'Secular One, sans-serif'}} bg="success" className="m-3">
-                <Container className="m-2">
-                    <div className='d-flex align-items-center justify-content-between m-2'>
-                        <h2>Available Rides:</h2>
-                        <div style={{ marginLeft: '0px' }}>
-                          <Button variant="dark my-auto mr-2" onClick={this.openAddModal}><b>New ride</b> <BsPlusCircle className="ml-2 mt-2 mb-2" /></Button>
-                          <Button variant="outline-light my-auto" onClick={this.openSearchModal}><b>Search</b> <BsSearch className="m-2" /></Button>
-                        </div>
-                    </div>
-                    <Row xs={1} md={4}>
-                        {this.renderItems()}
-                    </Row>
-                </Container>
+          <>
+            <Container style={{ fontFamily: 'Secular One, sans-serif'}} className="m-2 mt-4" fluid>
+                <div className='d-flex align-items-center justify-content-between m-2'>
+                  <h2 style={{color: "#2e2e2e"}}>Available Rides:</h2>
+                  <div style={{ marginLeft: '0px' }}>
+                    <Button variant="dark my-auto mr-2" onClick={this.openAddModal}>New ride <BsPlusCircle className="ml-2 mt-2 mb-2" /></Button>
+                    <Button variant="outline-light my-auto" onClick={this.openSearchModal}>Search <BsSearch className="m-2" /></Button>
+                  </div>
+                </div>
+                <Card bg="light-box" className="p-3 mr-2 mt-3">
+                  {this.props.rides.length === 0 && 
+                    <>
+                      <div style={{margin: "auto"}}>
+                        <h5>No rides found. Try resetting your search!</h5>
+                      </div>
+                    </>
+                  }
+                  <Row xs={1} md={this.state.rideCols}>
+                      {this.props.rides.length > 0 && this.renderItems()}
+                  </Row>
+                </Card>
+            </Container>
 
-                <AddModal show={this.state.showAddModal} close={this.closeAddModal} />
-                <SearchModal show={this.state.showSearchModal} close={this.closeSearchModal} />
-            </Card>
+            <AddModal show={this.state.showAddModal} close={this.closeAddModal} />
+            <SearchModal show={this.state.showSearchModal} close={this.closeSearchModal} />
+          </>
         )
       }
 }

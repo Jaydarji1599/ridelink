@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Button, Form } from 'react-bootstrap';
+import { Card, Button, Form, Spinner } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -10,7 +10,8 @@ import { login } from "../../actions/auth";
 class LoginView extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        loading: false
     }
     static propTypes = {
         login: PropTypes.func.isRequired,
@@ -20,7 +21,11 @@ class LoginView extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.login(this.state.username, this.state.password);
+        this.setState({loading: true});
+        setTimeout(() => {
+            this.props.login(this.state.username, this.state.password);
+            this.setState({loading: false});
+        }, 1000);
     };
 
     onChange = (e) => {this.setState({ [e.target.name]: e.target.value })};
@@ -30,26 +35,26 @@ class LoginView extends Component {
             return <Navigate to="/" />
         }
         return (
-            <Card className="bg-success m-3 p-2" style={{width: "350px"}}>
+            <Card className="bg-primary m-3 p-2" style={{width: "350px"}}>
                 <Form className="p-3 m-3 gap-3">
-                <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label style={{color: "white"}}>Username</Form.Label>
-                    <Form.Control type="username" placeholder="Enter username" name="username" onChange={this.onChange} />
+                <Form.Group className="mb-3" controlId="formGroupEmail" controlId="validationCustom01">
+                    <Form.Label style={{color: "#2e2e2e"}}>Username</Form.Label>
+                    <Form.Control required type="username" placeholder="Enter username" name="username" onChange={this.onChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label style={{color: "white"}}>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password"  onChange={this.onChange} />
+                <Form.Group className="mb-3" controlId="formGroupPassword" controlId="validationCustom02">
+                    <Form.Label style={{color: "#2e2e2e"}}>Password</Form.Label>
+                    <Form.Control required type="password" placeholder="Password" name="password"  onChange={this.onChange} />
                 </Form.Group>
                 {this.props.loginError && (
-                    <p style={{color: '#FFCCCB'}}>Wrong username or password entered. Please try again.</p>
+                    <p style={{color: 'red'}}>Wrong username or password entered. Please try again.</p>
                 )}
                 <Link>
-                    <Button variant="outline-light" type="submit" onClick={this.onSubmit}>
-                        Sign in
+                    <Button variant="success" type="submit" onClick={this.onSubmit}>
+                    {this.state.loading? <Spinner animation="border" size="sm" /> : 'Login'}
                     </Button>
                 </Link>
                 <br />
-                <p className="mt-2" style={{color: "black"}}>New around here? <Link style={{color: "white"}} onClick= {() => this.props.switchView("Signup")}><b> Register now!</b></Link></p>
+                <p className="mt-2" style={{color: "black"}}>New around here? <Link style={{color: "white"}} onClick= {() => this.props.switchView("Signup")}>Register now!</Link></p>
                 </Form>
             </Card>
         )

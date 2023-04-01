@@ -91,7 +91,7 @@ export const register = ({ username, email, firstName, lastName, password, phone
                 '/api/contacts/', 
                 {
                     user: res.data.user.id,
-                    phone: phone
+                    phone: "+1" + phone
                 }, 
                 config
             )
@@ -102,10 +102,10 @@ export const register = ({ username, email, firstName, lastName, password, phone
                 });
             })
             .catch(
-                (err => {
-                    console.log(err);
+                ((err) => {
                     dispatch({
-                        type: REGISTER_FAIL
+                        type: REGISTER_FAIL,
+                        payload: "Invalid phone number."
                     })
                 })
             )
@@ -113,7 +113,8 @@ export const register = ({ username, email, firstName, lastName, password, phone
         .catch(err => {
             console.log(err);
             dispatch({
-                type: REGISTER_FAIL
+                type: REGISTER_FAIL,
+                payload: err.response.request.responseText
             })
         })
 };
@@ -168,6 +169,7 @@ export const updateProfile = ({ username, email, firstName, lastName, pk }) => (
             })
         })
         .catch(err => {
+            console.log(err);
             dispatch({
                 type: UPDATE_FAIL,
                 payload: err.response.request.responseText

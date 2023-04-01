@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Accordion from 'react-bootstrap/Accordion';
 import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
-
+import { useState } from 'react';
 import FAQCard from './FAQCard';
 
 //import Google
@@ -30,9 +30,16 @@ import {
 } from 'mdb-react-ui-kit';
 
 export default function HelpCard() {
+
+  const [disable, setDisable] = useState(false);
+  const [buttonText, setButtonText] = useState('Submit');
+  const onClick = () => {
+    setDisable(true);
+    setButtonText('Submitted');
+  }
   return (
-    <section style={{ backgroundColor: '#e0ffe0' }}>
-      <MDBContainer className="py-5">
+    <section>
+      <MDBContainer>
         <MDBCol>
           <MDBRow>
             <MDBCol lg="6">
@@ -124,7 +131,7 @@ export default function HelpCard() {
                         <Form.Label>Your question</Form.Label>
                         <Form.Control as="textarea" rows={3} />
                     </Form.Group>
-                    <Button variant="success">Submit</Button>
+                    <Button variant="success" disabled={disable} onClick={onClick}>{buttonText}</Button>
                 </Form>
               </MDBCardBody>
             </MDBCol>

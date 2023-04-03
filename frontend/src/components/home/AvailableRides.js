@@ -3,12 +3,11 @@ import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterRides, addPassenger } from '../../actions/rides';
-import { BsArrowRightCircle, BsSearch, BsPlusCircle } from 'react-icons/bs';
+import { BsSearch, BsPlusCircle } from 'react-icons/bs';
 import {HiArrowSmRight} from 'react-icons/hi';
 import AddModal from "./availableRides/AddModal";
 import SearchModal from "./availableRides/SearchModal";
 import ProfileModal from "./availableRides/ProfileModal";
-import axios from "axios";
 
 
 export class AvailableRides extends Component {
@@ -88,7 +87,7 @@ export class AvailableRides extends Component {
                   {item.destination}
                   </Card.Header>
                 <Card.Body>
-                  <Card.Subtitle className="mb-2 text-muted">{item.date}, {item.time}</Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">{ formatDateAndTime(item.date, item.time) }</Card.Subtitle>
                   <Card.Text>
                     <ProfileModal driver={item.driver} curUser={this.props.user.id} />
                   </Card.Text>
@@ -134,10 +133,33 @@ export class AvailableRides extends Component {
 }
 
 const mapStateToProps = state => ({
-    rides: state.rides.filteredRides,
+    rides: state.rides.filteredRides.filter(r => r.driver !== state.auth.user.id),
     user: state.auth.user,
     passengers: state.rides.passengers,
     ratings: state.auth.ratings
-})
+});
+
+function formatDateAndTime(dateStr, timeStr) {
+  let dateObj = new Date(dateStr);
+  let timeArr = timeStr.split(":");
+  let hours = parseInt(timeArr[0], 10);
+  let minutes = parseInt(timeArr[1], 10);
+
+  let ampm = "AM";
+  if (hours >= 12) {
+    ampm = "PM";
+  }
+  if (hours > 12) {
+    hours -= 12;
+  }
+
+  let options = { month: "short", day: "numeric", suffix: "short" };
+  let formatter = new Intl.DateTimeFormat("en-US", options);
+
+  let formattedDateStr = formatter.format(dateObj);
+  let formattedTimeStr = `${hours}:${minutes < 10 ? "0" + minutes : minutes}${ampm}`;
+
+  return `${formattedDateStr}, ${formattedTimeStr}`;
+};
     
 export default connect(mapStateToProps, {filterRides, addPassenger})(AvailableRides);

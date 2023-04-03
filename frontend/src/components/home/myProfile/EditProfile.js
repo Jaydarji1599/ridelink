@@ -15,7 +15,7 @@ const getSchema = ({username, email}) => Yup.object().shape({
         if (value === username) {
             return true;
         }
-        const response = await axios.get(`/api/getuser/?username=${value}`);
+        const response = await axios.get(`api/getuser/?username=${value}`);
         return !response.data.length > 0;
     }),
     email: Yup.string()
@@ -24,7 +24,7 @@ const getSchema = ({username, email}) => Yup.object().shape({
         if (value === email) {
             return true;
         }
-        const response = await axios.get(`/api/getuser/?email=${value}`);
+        const response = await axios.get(`api/getuser/?email=${value}`);
         return !response.data.length > 0;
     }),
     firstName: Yup.string(),
@@ -46,6 +46,7 @@ class EditProfile extends Component {
             pk: this.props.user.id
         });
         setTimeout( () => {
+            this.setState({isLoading: false});
             this.props.switch();
         }, 1000);
     };

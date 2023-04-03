@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {
     USER_LOADED,
-    USER_LOADING,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -26,7 +25,6 @@ export const loadUser = () => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            console.log(err);
             dispatch({
                 type: AUTH_ERROR
             })
@@ -95,23 +93,12 @@ export const register = ({ username, email, firstName, lastName, password, phone
                 }, 
                 config
             )
-            .then((res) => {
-                dispatch({
-                    type: REGISTER_SUCCESS,
-                    payload: res.data
-                });
-            })
-            .catch(
-                ((err) => {
-                    dispatch({
-                        type: REGISTER_FAIL,
-                        payload: "Invalid phone number."
-                    })
-                })
-            )
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: res.data
+            });
         })
         .catch(err => {
-            console.log(err);
             dispatch({
                 type: REGISTER_FAIL,
                 payload: err.response.request.responseText

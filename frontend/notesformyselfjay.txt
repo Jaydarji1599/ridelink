@@ -1,5 +1,33 @@
 
-IMPORTANT****:
-- only display rides NOT posted by user in available rides
 
-- require ride select on 
+
+
+
+Team meetings: THURSDAY
+- snapshots of meetings/jira/github
+
+
+Documentation, run and setup, report SATURDAY:
+- document ALLLL code
+    - backend -> tonight/tomorrow -> aziz & Jay D
+    - frontend -> thursday -> Jay T
+- docker OR just readme guide
+
+
+
+Features:
+- signup/login/form validate
+- ride posting, filtering, booking, cancelling
+- ride management
+- profile editing
+- help section
+
+
+User 1: Signs up, decides to post  ride as travelling to Halifax from Antigonish
+User 2: Logs in, filters & decides to book ride from halfiax to Antigonish
+User 3 logs in, books same ride.
+User 1 Logs back in, checks reviews of user 2, decides to remove from ride.
+User 1 updates ride details, changes username.
+User 1 checks help section.
+User 3 logs back in, cancels ride with user 1.
+

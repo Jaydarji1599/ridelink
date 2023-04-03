@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Row, Col, ListGroup, Tab } from "react-bootstrap";
+import { ListGroup, Tab } from "react-bootstrap";
 import RideLinkHeader from "../components/RideLinkHeader";
 import AvailableRides from "../components/home/AvailableRides";
 import HelpSection from "../components/home/HelpSection";

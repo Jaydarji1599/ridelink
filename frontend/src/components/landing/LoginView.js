@@ -23,8 +23,8 @@ class LoginView extends Component {
         e.preventDefault();
         this.setState({loading: true});
         setTimeout(() => {
-            this.props.login(this.state.username, this.state.password);
             this.setState({loading: false});
+            this.props.login(this.state.username, this.state.password);
         }, 1000);
     };
 

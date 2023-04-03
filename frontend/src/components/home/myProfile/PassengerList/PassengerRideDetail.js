@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { ListGroup, Button, Card } from "react-bootstrap";
 import { BsArrowRightCircle } from 'react-icons/bs';
-import axios from "axios";
 import ProfileModal from "../../availableRides/ProfileModal";
 import { connect } from "react-redux";
 
@@ -36,10 +35,8 @@ export class PassengerRideDetail extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(ownProps)
-    console.log(state.rides.rides)
     return {
-        ride: state.rides.rides.filter((r) => r.id == ownProps.passenger.ride)[0]
+        ride: state.rides.rides.filter((r) => r.id === ownProps.passenger.ride)[0]
     }
 }
 
